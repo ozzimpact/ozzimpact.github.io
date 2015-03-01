@@ -4,10 +4,7 @@
 <body class="home-template">
 {% if site.header_bg %}<div class="notepad-parallax-background" style="background-image: url({{ site.url }}/images/headers/{{site.header_bg}})"></div>{% endif %}
 {% include headerhome.html %}
-<!--<main class="notepad-content" role="main">
-{{ content }}
-</main>-->
-<main id="notepad-page-container" class="notepad-page-container" role="main">
+<main class="notepad-content" role="main">
 {{ content }}
 </main>
 {% include footer.html %}
