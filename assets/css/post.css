@@ -455,7 +455,7 @@ html, body, .notepad-post-container, .notepad-post-header {
     font-size: 50%; } }
 .post-template .row:not(.notepad-post-title-simple),
 .page-template .row:not(.notepad-post-title-simple) {
-  max-width: 45.625rem; }
+  max-width: 70.625rem; }
   .post-template .row:not(.notepad-post-title-simple) p,
   .page-template .row:not(.notepad-post-title-simple) p {
     margin: 0 auto 2em auto !important;
