@@ -15,7 +15,6 @@
     <script src="{{ site.url }}/assets/js/scripts.min.js"></script>
     <script src="{{ site.url }}/assets/js/vendor/selectshare.js"></script>
     {% if site.nprogress %}<script src="{{ site.url }}/assets/js/vendor/nprogress.js"></script>{% endif %}
-<script type='text/javascript'>console.log("HMFaysal's Blog Version 2.0.3");</script>
 <script type='text/javascript'>
   $(document).ready(function() {
     $(".time").text(function (index, value) {
@@ -28,6 +27,8 @@
 </script>
 
 {% if site.google_analytics %}
-<script>(function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","{{ site.google_analytics }}","auto");ga("require","displayfeatures");ga("send","pageview");</script>
+<script>
+(function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","{{ site.google_analytics }}","auto");ga("require","displayfeatures");ga("send","pageview");
+</script>
 {% endif %}
 {% if site.nprogress %}<script>NProgress.start();var interval=setInterval(function(){NProgress.inc()},1000);jQuery(window).load(function(){clearInterval(interval);NProgress.done()});jQuery(window).unload(function(){NProgress.start()});</script>{% endif %}
