@@ -515,3 +515,6 @@ nav.pagination {
     bottom: 0; }
   .tags-loop .tag-link:last-child:after {
     display: none; }
+.row {
+max-width: 90.5rem;
+}
