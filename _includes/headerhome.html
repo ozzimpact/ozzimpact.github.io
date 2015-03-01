@@ -7,12 +7,12 @@
 {% include navigation.html %}
  <div class="clearfix"></div>
     </div>
-    
-    <h1 class="notepad-blog-title">
+    <!--{% if site.header_bg %}<div class="notepad-site-head-content with-bg-cover">{% else %}<div class="notepad-site-head-content">{% endif %}-->
+    <!--<h1 class="notepad-blog-title">
         <span class="notepad-site-head-title-bg">
             {{ site.title }}
         </span>
-    </h1>
+    </h1>-->
     <h2 class="notepad-blog-description"><a href="{{ site.url }}/status-updates">{% for status in site.data.statuses %}{% if forloop.last %}{{ status.message }}{% endif %}{% endfor %}</a></h2>
 </div>
 </header>
