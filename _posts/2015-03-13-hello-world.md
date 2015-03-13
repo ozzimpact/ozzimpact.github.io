@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Installing Jekyll on Windows"
-description: Simple 10 step method to get started with Jekyll
+title: "Hello world!"
+description: Hello world!
 headline: 
 category: webdevelopment
 tags: [jekyll, installation]
