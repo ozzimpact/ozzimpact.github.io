@@ -9,13 +9,13 @@ comments: true
 mathjax: 
 ---
 
-Redis + Sentinel + Monit setup scripts and High Availability
+Redis + Sentinel + Monit setup scripts and High Availability  
 
-> ##It is not production ready configuration yet! Work in progress..##
+> ##It is not production ready configuration yet! Work in progress..##  
 
-_**Edited Version**_
+_**Edited Version**_  
 
-###REDIS
+###REDIS  
 
 **To Install Master**  
 Edit ```master.sh``` file to set configurations (redis version,instance name, port);
@@ -35,7 +35,7 @@ sudo sh master.sh #Run install script
 ```
 
 **To Install Slave**  
-Edit ```member.sh``` file to set configurations (redis version,instance name, port, master ip, master port);
+Edit ```member.sh``` file to set configurations (redis version,instance name, port, master ip, master port);  
 ```sh
 # Defaults
 REDIS_VER=2.8.19
@@ -53,11 +53,11 @@ wget https://raw.githubusercontent.com/ziyasal/redisetup/master/member.sh
 sudo sh member.sh #Run install script
 ```
 
-_**Set somaxconn**_
+_**Set somaxconn**_  
 ```sh
 echo 65535 > /proc/sys/net/core/somaxconn
 ```
-_**redis.conf**_   [for more detail](http://redis.io/topics/config)
+_**redis.conf**_   [for more detail](http://redis.io/topics/config)  
 ```sh
 tcp-backlog 65535
 #**TODO**
