@@ -11,14 +11,14 @@ mathjax:
 
 Redis + Sentinel + Monit setup scripts and High Availability  
 
-> ##It is not production ready configuration yet! Work in progress..##  
+> ##It is not production ready configuration yet! Work in progress..##  <br/>
 
-_**Edited Version**_  
+_**Edited Version**_  <br/>
 
-###REDIS  
+###REDIS  <br/>
 
-**To Install Master**  
-Edit ```master.sh``` file to set configurations (redis version,instance name, port);
+**To Install Master**  <br/>
+Edit ```master.sh``` file to set configurations (redis version,instance name, port);<br/>
 ```sh
 # Defaults
 REDIS_VER=2.8.19
