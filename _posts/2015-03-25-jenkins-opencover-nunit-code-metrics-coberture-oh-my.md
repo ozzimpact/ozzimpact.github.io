@@ -35,52 +35,53 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 {% highlight bash %}
 C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe
 {% endhighlight %}
-![Jenkins MSBuild Settings]()
+![Jenkins MSBuild Settings]()  
+
 **Register Visual Studio Code Metrics Tool**   
 {% highlight bash %}
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\metrics.exe
 {% endhighlight %}
-![Jenkins Visual Studio Code Metrics Tool Settings]()
+![Jenkins Visual Studio Code Metrics Tool Settings]()  
 
 ###Create Jenkins Build Job  
 **Source Code Management settings**  
-![Jenkins Job Source Control Settings]()
+![Jenkins Job Source Control Settings]()  
 
 **Build settings**  
 _**MSBuild**_  
-![MSBUild Settings]()
+![MSBUild Settings]()  
 
 _**OpenCover & NUnit**_  
 {% highlight bash %}
 "C:\Tools\opencover\OpenCover.Console.exe" -target:"C:\Tools\nunit\nunit-console.exe" -targetargs:"%JOB_NAME%.Tests\bin\Debug\%JOB_NAME%.Tests.dll /framework:net-4.5 /xml:%JOB_NAME%NunitTestResults.xml /nologo /noshadow" -filter:"+[*]* -[%JOB_NAME%.Tests]*" -register:Path64 -hideskipped:Filter -output:%JOB_NAME%Coverage.xml
 {% endhighlight %}
-![OpenCover & NUnit Settings]()
+![OpenCover & NUnit Settings]()  
 
 _**ReportGenerator**_  
 {% highlight bash %}
 "C:\Tools\reportgenerator\ReportGenerator.exe" -reports:%JOB_NAME%Coverage.xml -targetDir:CodeCoverageHTML
 {% endhighlight %}
-![ReportGenerator Settings]()
+![ReportGenerator Settings]()  
 
 _**OpenCoverToCoberturaConverter**_  
 {% highlight bash %}
 "C:\Tools\opencover_to_cobertura_converter\OpenCoverToCoberturaConverter.exe" -input:%JOB_NAME%Coverage.xml -output:%JOB_NAME%Cobertura.xml -sources:%WORKSPACE%
 {% endhighlight %}
-![OpenCoverToCoberturaConverter Settings]()
+![OpenCoverToCoberturaConverter Settings]()  
 
 _**Vs Code Metrics Power Tool exec**_  
-![Vs Code Metrics Power Tool exec Settings]()
+![Vs Code Metrics Power Tool exec Settings]()  
 
 **Post-Build settings**  
 
-**Pusblish Cobertura Coverage Report**
-![Pusblish Cobertura Coverage Reports]()
+**Pusblish Cobertura Coverage Report**  
+![Pusblish Cobertura Coverage Reports]()  
 
-**Pusblish Html Reports**
-![Pusblish Html Reports]()
+**Pusblish Html Reports**  
+![Pusblish Html Reports]()  
 
-**Pusblish NUnit Test Results Report**
-![Pusblish NUnit Test Results Report]()
+**Pusblish NUnit Test Results Report** 
+![Pusblish NUnit Test Results Report]()  
 
-**Record VS Code Metrics Power Tool Report**
-![Record VS Code Metrics Power Tool Report]()
+**Record VS Code Metrics Power Tool Report**  
+![Record VS Code Metrics Power Tool Report]()  
