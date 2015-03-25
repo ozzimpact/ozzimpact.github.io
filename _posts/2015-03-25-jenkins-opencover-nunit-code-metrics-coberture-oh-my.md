@@ -37,53 +37,52 @@ _**Info:** __I extracted all tools to ``C:\Tools\{toolname}\`` folder._
 {% highlight bash %}
 C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe
 {% endhighlight %}
-![Jenkins MSBuild Settings]()  
+![Jenkins MSBuild Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_20-39-27.png)  
 
 **Register Visual Studio Code Metrics Tool**   
 {% highlight bash %}
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\metrics.exe
 {% endhighlight %}
-![Jenkins Visual Studio Code Metrics Tool Settings]()  
+![Jenkins Visual Studio Code Metrics Tool Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_20-37-49.png)  
 
 ###Create Jenkins Build Job  
 **Source Code Management settings**  
-![Jenkins Job Source Control Settings]()  
+![Jenkins Job Source Control Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-21-27.png)  
 
 **Build settings**  
 _**MSBuild**_  
-![MSBUild Settings]()  
+![MSBUild Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-11.png)  
 
 _**OpenCover & NUnit**_  
 {% highlight bash %}
 "C:\Tools\opencover\OpenCover.Console.exe" -target:"C:\Tools\nunit\nunit-console.exe" -targetargs:"%JOB_NAME%.Tests\bin\Debug\%JOB_NAME%.Tests.dll /framework:net-4.5 /xml:%JOB_NAME%NunitTestResults.xml /nologo /noshadow" -filter:"+[*]* -[%JOB_NAME%.Tests]*" -register:Path64 -hideskipped:Filter -output:%JOB_NAME%Coverage.xml
 {% endhighlight %}
-![OpenCover & NUnit Settings]()  
+![OpenCover & NUnit Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_22-18-14.png)  
 
 _**ReportGenerator**_  
 {% highlight bash %}
 "C:\Tools\reportgenerator\ReportGenerator.exe" -reports:%JOB_NAME%Coverage.xml -targetDir:CodeCoverageHTML
 {% endhighlight %}
-![ReportGenerator Settings]()  
+![ReportGenerator Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_22-18-04.png)  
 
 _**OpenCoverToCoberturaConverter**_  
 {% highlight bash %}
 "C:\Tools\opencover_to_cobertura_converter\OpenCoverToCoberturaConverter.exe" -input:%JOB_NAME%Coverage.xml -output:%JOB_NAME%Cobertura.xml -sources:%WORKSPACE%
 {% endhighlight %}
-![OpenCoverToCoberturaConverter Settings]()  
+![OpenCoverToCoberturaConverter Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-18-51.png)  
 
 _**Vs Code Metrics Power Tool exec**_  
-![Vs Code Metrics Power Tool exec Settings]()  
+![Vs Code Metrics Power Tool exec Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-30.png)  
 
 **Post-Build settings**  
+**Publish Cobertura Coverage Report**  
+![Publish Cobertura Coverage Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-11.png)  
 
-**Pusblish Cobertura Coverage Report**  
-![Pusblish Cobertura Coverage Reports]()  
+**Publish Html Reports**  
+![Publish Html Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-43.png)  
 
-**Pusblish Html Reports**  
-![Pusblish Html Reports]()  
-
-**Pusblish NUnit Test Results Report** 
-![Pusblish NUnit Test Results Report]()  
+**Publish NUnit Test Results Report** 
+![Publish NUnit Test Results Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-31.png)  
 
 **Record VS Code Metrics Power Tool Report**  
-![Record VS Code Metrics Power Tool Report]()  
+![Record VS Code Metrics Power Tool Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-52.png)  
