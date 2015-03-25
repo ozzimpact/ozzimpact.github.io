@@ -105,7 +105,7 @@ Add post-build step to view code coverage results as ``Cobertura`` report.
 
 _**Publish Html Reports**_  
 {% highlight bash %}
-CodeCoverageHTML   # directory
+CodeCoverageHTML   # HTML directory to archive
 index.htm          # report index page
 Code Coverage      # report title
 {% endhighlight %}
