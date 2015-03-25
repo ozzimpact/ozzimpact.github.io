@@ -51,33 +51,52 @@ C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis T
 Create Jenkins Build Job  
 ---------------------------------------------------------
 **Source Code Management settings**  
+Configure ``Jenkins`` job to get source code from ``git`` repository.
 ![Jenkins Job Source Control Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-21-27.png)  
+
 **Build settings**  
 _**MSBuild**_  
+Configure ``Jenkins`` job to build source code using ``MSBuild``.
 ![MSBUild Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-11.png)  
+
 _**OpenCover & NUnit**_  
+Add build step to generate ``OpenCover`` coverage reults using ```NUit`` test runner.  
 {% highlight bash %}
 "C:\Tools\opencover\OpenCover.Console.exe" -target:"C:\Tools\nunit\nunit-console.exe" -targetargs:"%JOB_NAME%.Tests\bin\Debug\%JOB_NAME%.Tests.dll /framework:net-4.5 /xml:%JOB_NAME%NunitTestResults.xml /nologo /noshadow" -filter:"+[*]* -[%JOB_NAME%.Tests]*" -register:Path64 -hideskipped:Filter -output:%JOB_NAME%Coverage.xml
 {% endhighlight %}
 ![OpenCover & NUnit Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_22-18-14.png)  
+
 _**ReportGenerator**_  
+Add build step to generate html results from ``OpenCover`` coverage reults.  
 {% highlight bash %}
 "C:\Tools\reportgenerator\ReportGenerator.exe" -reports:%JOB_NAME%Coverage.xml -targetDir:CodeCoverageHTML
 {% endhighlight %}
 ![ReportGenerator Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_22-18-04.png)  
+
 _**OpenCoverToCoberturaConverter**_  
+Add build step to convert ``opencover`` results to ``cobertura`` reports.  
 {% highlight bash %}
 "C:\Tools\opencover_to_cobertura_converter\OpenCoverToCoberturaConverter.exe" -input:%JOB_NAME%Coverage.xml -output:%JOB_NAME%Cobertura.xml -sources:%WORKSPACE%
 {% endhighlight %}
-![OpenCoverToCoberturaConverter Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-18-51.png)  
+![OpenCoverToCoberturaConverter Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-18-51.png) 
+
 _**Vs Code Metrics Power Tool exec**_  
+Add build step to calculate ``Code Metrics``.  
 ![Vs Code Metrics Power Tool exec Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-30.png)  
+
 **Post-Build settings**  
-_**Publish Cobertura Coverage Report**_  
+_**Publish Cobertura Coverage Report**_ 
+Add post-build step to view code coverage results as ``Cobertura`` report. 
 ![Publish Cobertura Coverage Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-11.png)  
+
 _**Publish Html Reports**_  
+Add post-build step to view code coverage results as html. 
 ![Publish Html Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-43.png)  
-_**Publish NUnit Test Results Report**_ 
+
+_**Publish NUnit Test Results Report**_  
+Add post-build step to view ``NUnit`` Test results.  
 ![Publish NUnit Test Results Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-31.png)  
+
 _**Record VS Code Metrics Power Tool Report**_  
-![Record VS Code Metrics Power Tool Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-52.png)  
+Add post-build step to view  ``VS Code Metrics Power Tool`` Reports.  
+![Record VS Code Metrics Power Tool Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-52.png)
