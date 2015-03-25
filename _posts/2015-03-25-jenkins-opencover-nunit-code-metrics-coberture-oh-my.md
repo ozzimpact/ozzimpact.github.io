@@ -79,14 +79,14 @@ _**Vs Code Metrics Power Tool exec**_
 ![Vs Code Metrics Power Tool exec Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-30.png)  
 
 **Post-Build settings**  
-**Publish Cobertura Coverage Report**  
+_**Publish Cobertura Coverage Report**_  
 ![Publish Cobertura Coverage Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-11.png)  
 
-**Publish Html Reports**  
+_**Publish Html Reports**_  
 ![Publish Html Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-43.png)  
 
-**Publish NUnit Test Results Report** 
+_**Publish NUnit Test Results Report**_ 
 ![Publish NUnit Test Results Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-31.png)  
 
-**Record VS Code Metrics Power Tool Report**  
+_**Record VS Code Metrics Power Tool Report**_  
 ![Record VS Code Metrics Power Tool Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-52.png)  
