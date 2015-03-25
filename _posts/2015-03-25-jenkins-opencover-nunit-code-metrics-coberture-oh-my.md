@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Jenkins Tutorial"
+title: "Useful Jenkins Plugins and Configuration"
 description: Jenkins, OpenCover, NUnit, Code Metrics, Cobertura Oh my!
 headline: 
 category: engineering
