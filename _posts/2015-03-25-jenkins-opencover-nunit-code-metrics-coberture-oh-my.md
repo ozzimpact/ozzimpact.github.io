@@ -125,3 +125,17 @@ Add post-build step to view  ``VS Code Metrics Power Tool`` Reports.
 {YourProjectName}Metrics.xml
 {% endhighlight %}
 ![Record VS Code Metrics Power Tool Report]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-52.png)
+
+Result
+---------------------------------------------------------
+**Tests**  
+![Test]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-41.png)  
+**Code Coverage - OpenCover**  
+![Code Coverage - OpenCover]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-25-28.png)  
+
+**Code Coverage - Cobertura**  
+![Code Coverage - Cobertura]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-26-18.png)  
+![Code Coverage - Cobertura]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-25-48.png)  
+
+**Metrics**  
+![Metrics]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-05.png) 
