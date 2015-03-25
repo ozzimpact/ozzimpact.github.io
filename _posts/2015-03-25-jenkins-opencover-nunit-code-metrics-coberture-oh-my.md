@@ -30,7 +30,7 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 - [Metrics Power Tools](http://www.microsoft.com/en-us/download/confirmation.aspx?id=41647)  
 - [OpenCoverToCoberturaConverter](http://www.nuget.org/packages/OpenCoverToCoberturaConverter)  
 
-_**Info:** __I extracted all tools to ``C:\Tools\{toolname}\`` folder._
+_**Info:** _I extracted all tools to ``C:\Tools\{toolname}\`` folder._
 
 ###Prepare Environment;  
 **Register MsBuild** 
