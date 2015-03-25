@@ -3,7 +3,7 @@ layout: post
 title: "Useful Jenkins Plugins and Configuration"
 description: Jenkins, OpenCover, NUnit, Code Metrics, Cobertura Oh my!
 headline: 
-category: engineering
+category: development
 tags: [jenkins, opencover, code, metrics, cobertura, ci, git, continuous integration]
 comments: true
 mathjax: 
