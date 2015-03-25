@@ -52,11 +52,17 @@ Create Jenkins Build Job
 ---------------------------------------------------------
 **Source Code Management settings**  
 Configure ``Jenkins`` job to get source code from ``git`` repository.  
+{% highlight bash %}  
+https://github.com/{username}/{projectname}.git
+{% endhighlight %}  
 ![Jenkins Job Source Control Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-21-27.png)  
 
 **Build settings**  
 _**MSBuild**_  
 Configure ``Jenkins`` job to build source code using ``MSBuild``.  
+{% highlight bash %}  
+{projectname}.sln
+{% endhighlight %}  
 ![MSBUild Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-11.png)  
 
 _**OpenCover & NUnit**_  
