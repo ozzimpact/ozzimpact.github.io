@@ -43,7 +43,7 @@ C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe
 {% highlight bash %}
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\metrics.exe
 {% endhighlight %}
-![Jenkins Visual Studio Code Metrics Tool Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_20-37-49.png)  
+![Jenkins Visual Studio Code Metrics Tool Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-30.png)  
 
 ###Create Jenkins Build Job  
 **Source Code Management settings**  
