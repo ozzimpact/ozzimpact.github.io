@@ -17,12 +17,12 @@ Please use instructions from here [Installing Jenkins on Windows](https://wiki.j
 **Git**  
 Download and install ``git`` from [link](https://msysgit.github.io/)  
 **Jenkins Plugins**  
-- Install [Git](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin) Plugin  
-- Install [MsBuildPlugin](https://wiki.jenkins-ci.org/display/JENKINS/MSBuild+Plugin) Pugin  
-- Install [HtmlPublisherPlugin](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin)   
-- Install [NUnitPlugin](https://wiki.jenkins-ci.org/display/JENKINS/NUnit+Plugin)  
-- Install [Visual Studio Code Metrics](https://wiki.jenkins-ci.org/display/JENKINS/Visual+Studio+Code+Metrics+Plugin) Plugin  
-- Install [Cobertura](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin) Plugin  
+- [Git](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin)  
+- [MsBuildPlugin](https://wiki.jenkins-ci.org/display/JENKINS/MSBuild+Plugin)  
+- [HtmlPublisherPlugin](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin)   
+- [NUnitPlugin](https://wiki.jenkins-ci.org/display/JENKINS/NUnit+Plugin)    
+- [Visual Studio Code Metrics](https://wiki.jenkins-ci.org/display/JENKINS/Visual+Studio+Code+Metrics+Plugin)    
+- [Cobertura](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)  
 
 **Tools**  
 - [ReportGenerator](https://github.com/danielpalme/ReportGenerator)
