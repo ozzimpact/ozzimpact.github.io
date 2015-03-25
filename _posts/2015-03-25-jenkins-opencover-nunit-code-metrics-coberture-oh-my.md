@@ -11,7 +11,8 @@ mathjax:
 
 ## Jenkins, OpenCover, NUnit, Code Metrics, Cobertura Oh my!
 
-###Requirements  
+Requirements  
+=======================================
 **Jenkins**  
 Please use instructions from here [Installing Jenkins on Windows](https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins)  
 **Git**  
@@ -32,7 +33,8 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 
 _**Info:** _I extracted all tools to ``C:\Tools\{toolname}\`` folder._
 
-###Prepare Environment;  
+Prepare Environment;  
+=======================================
 **Register MsBuild** 
 {% highlight bash %}
 C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe
@@ -45,7 +47,8 @@ C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis T
 {% endhighlight %}
 ![Jenkins Visual Studio Code Metrics Tool Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-30.png)  
 
-###Create Jenkins Build Job  
+Create Jenkins Build Job  
+=======================================
 **Source Code Management settings**  
 ![Jenkins Job Source Control Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-21-27.png)  
 
