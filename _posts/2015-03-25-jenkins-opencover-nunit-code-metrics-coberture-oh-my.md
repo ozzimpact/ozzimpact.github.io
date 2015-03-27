@@ -12,22 +12,22 @@ mathjax:
 ## Jenkins, OpenCover, NUnit, Code Metrics, Cobertura Oh my!
 Abstract
 ---------------------------------------------------------
-In this tutorial, we will be talking about how to provide CI(Continuous Integration) for C# project using Jenkins. And how to be informed about code and test coverage and code metrics. 
-- _Pre-Build_
- * Ensure that Jenkins and Git installed properly with necessary plugins and tools which are defined below.(_**Info**: Extract all tools to ``C:\Tools\{toolname}\`` folder._)
- * Jenkins settings should be configured to be able to run C# project and code metrics tool which is needed to prepare report, properly. Meaning by that, MSBuild and Visual Studio Code Metrics Tool should be registered. 
-- _Build_
- * Source code should be pulled to Jenkins from git or any other scm repository.(In this example Github is used.) A Jenkins job is created for this action.
- * After pulling the project, another Jenkins job is configured to build solution using MSBuildPlugin which is installed earlier.
- * Afterwards, build step should be set to generate OpenCover coverage result using NUnit test runner and another build step should be added to get OpenCover coverage result as an HTML file.
- * If you want to convert OpenCover coverage results to Cobertura reports, another build step should be added. There is a nuget package to make this easier which is OpenCoverToCoberturaConverter. ([Why Cobertura?](https://github.com/cobertura/cobertura/wiki/FAQ))
- * After reports, another build step is added to calculate code metrics using VS Code Metrics Power Tool.
-
-- _Post-Build_
- * As a post-build action, publishing Cobertura coverage report step should be added using Cobertura for Jenkins. 
- * And also Jenkins provides publishing reports as HTML files. Again, another post-build step should be added for this using HtmlPublisherPlugin. 
- * To publish NUnit test results as a post-build action, NUnitPlugin is configured.
- * To publish code metrics as a post-build action, Record VS Code Metrics Power Tool Report is configured.
+In this tutorial, we will be talking about how to provide ```CI(Continuous Integration)``` for ```.NET``` projects using ```Jenkins```. And how to be informed about code and test coverage and code metrics.   
+_Pre-Build_  
+ * Ensure that Jenkins and Git installed properly with necessary plugins and tools which are defined below.(_**Info**: Extract all tools to ``C:\Tools\{toolname}\`` folder._)  
+ * Jenkins settings should be configured to be able to run C# project and code metrics tool which is needed to prepare report, properly. Meaning by that, MSBuild and Visual Studio Code Metrics Tool should be registered.   
+_Build_   
+ - Source code should be pulled to Jenkins from git or any other scm repository.(In this example Github is used.) A Jenkins job is created for this action.  
+ - After pulling the project, another Jenkins job is configured to build solution using MSBuildPlugin which is installed earlier.  
+ - Afterwards, build step should be set to generate OpenCover coverage result using NUnit test runner and another build step should be added to get OpenCover coverage result as an HTML file.  
+ - If you want to convert OpenCover coverage results to Cobertura reports, another build step should be added. There is a nuget package to make this easier which is OpenCoverToCoberturaConverter. ([Why Cobertura?](https://github.com/cobertura/cobertura/wiki/FAQ))    
+ - After reports, another build step is added to calculate code metrics using VS Code Metrics Power Tool.  
+ 
+ _Post-Build_  
+ - As a post-build action, publishing Cobertura coverage report step should be added using Cobertura for Jenkins.   
+ - And also Jenkins provides publishing reports as HTML files. Again, another post-build step should be added for this using HtmlPublisherPlugin.   
+ - To publish NUnit test results as a post-build action, NUnitPlugin is configured.  
+ - To publish code metrics as a post-build action, Record VS Code Metrics Power Tool Report is configured.  
 
 Requirements  
 ---------------------------------------------------------
@@ -107,7 +107,7 @@ Add build step to convert ``opencover`` results to ``cobertura`` reports.
 _**VS Code Metrics Power Tool**_  
 Add build step to calculate ``Code Metrics``.  
 {% highlight bash %}
-"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\metrics.exe
+Your assemblies to calculate code metrics.
 {% endhighlight %}
 ![Vs Code Metrics Power Tool exec Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-19-54.png)  
 
