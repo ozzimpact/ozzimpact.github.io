@@ -109,7 +109,7 @@ Add build step to calculate ``Code Metrics``.
 {% highlight bash %}
 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\metrics.exe
 {% endhighlight %}
-![Vs Code Metrics Power Tool exec Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-30.png)  
+![Vs Code Metrics Power Tool exec Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-19-54.png)  
 
 **Post-Build settings**  
 _**Publish Cobertura Coverage Report**_  
