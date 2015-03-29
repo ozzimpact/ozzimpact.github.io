@@ -11,7 +11,7 @@ chart: true
 charttype: pie
 published: true
 ---
-I am a curious, self-learner, lover of open source, automation-obsessed and polyglot software architect living in the Istanbul on the northwest coast of Turkey who's passionate about researching and developing applications for desktop, web and mobile devices.
+I am a curious, self-learner, lover of open source, automation-obsessed and polyglot software architect and developer living in the Istanbul on the northwest coast of Turkey who's passionate about researching and developing applications for desktop, web and mobile devices.
 
 ### Briefly;
 _curious, self-learner, lover of open source, automation-obsessed, polyglot and platform independent_
