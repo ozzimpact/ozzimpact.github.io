@@ -12,7 +12,10 @@ mathjax:
 Redis + Sentinel + Monit setup scripts and High Availability   
 
 > TODO: Abstract
-_**(Edited Version)**_ 
+> Work in progress
+
+_**(Edited Version)**_  
+
 # Index
 * [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
     * [Redis Master/Slave](#redis-masterslave)  
