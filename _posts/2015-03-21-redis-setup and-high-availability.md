@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Redis sentinel and monit setup!"
-description: Redis sentinel and monit setup!
+title: "Redis High Availability"
+description: Redis High Availability
 headline: 
 category: development
 tags: [redis, monit, sentinel, high-availability]
