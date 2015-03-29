@@ -42,8 +42,8 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 • [Cobertura](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)  
 
 **Tools**  
-• [ReportGenerator](https://github.com/danielpalme/ReportGenerator)  
-• [OpenCover](https://github.com/OpenCover/opencove)  
+• [ReportGenerator](https://github.com/danielpalme/ReportGenerator/releases)  
+• [OpenCover](https://github.com/OpenCover/opencover/releases)  
 • [Metrics Power Tools](http://www.microsoft.com/en-us/download/confirmation.aspx?id=41647)  
 • [OpenCoverToCoberturaConverter](http://www.nuget.org/packages/OpenCoverToCoberturaConverter)  
 • [NUnit](http://nunit.org/?p=download)  
