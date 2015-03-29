@@ -47,7 +47,7 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 • [Metrics Power Tools](http://www.microsoft.com/en-us/download/confirmation.aspx?id=41647)  
 • [OpenCoverToCoberturaConverter](http://www.nuget.org/packages/OpenCoverToCoberturaConverter)  
 • [NUnit](http://nunit.org/?p=download)  
-_**Info:** Extract all tools(Metrics Power Tools will be installed in Program) to ``C:\Tools\{toolname}\`` folder._
+_**Info:** Extract all tools(Metrics Power Tools will be installed in Program Files) to ``C:\Tools\{toolname}\`` folder._
 
 Jenkins Settings  
 ---------------------------------------------------------
