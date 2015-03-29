@@ -32,24 +32,24 @@ _**Edited Version**_
 
 **To Install Master**   
 Edit ```master.sh``` file to set configurations (redis version,instance name, port);  
-```sh
+{% highlight bash %}
 # Defaults
 REDIS_VER=2.8.19
 UPDATE_LINUX_PACKAGES=false
 REDIS_INSTANCE_NAME=redis-server
 REDIS_INSTANCE_PORT=6379
-```
+{% endhighlight %}  
 
-```sh
+{% highlight bash %}
 mkdir redisetup
 cd redisetup
 wget https://raw.githubusercontent.com/ziyasal/redisetup/master/master.sh
 sudo sh master.sh #Run install script
-```
+{% endhighlight %}  
 
 **To Install Slave**   
 Edit ```member.sh``` file to set configurations (redis version,instance name, port, master ip, master port);  
-```sh
+{% highlight bash %}
 # Defaults
 REDIS_VER=2.8.19
 UPDATE_LINUX_PACKAGES=false      #true|false
@@ -57,21 +57,21 @@ REDIS_INSTANCE_NAME=redis-server
 REDIS_INSTANCE_PORT=6379         #Set another one if master node is on the same host
 REDIS_MASTER_IP=127.0.0.1
 REDIS_MASTER_PORT=6379
-```
+{% endhighlight %}  
 
-```sh
+{% highlight bash %}
 mkdir redisetup
 cd redisetup
 wget https://raw.githubusercontent.com/ziyasal/redisetup/master/member.sh
 sudo sh member.sh #Run install script
-```
+{% endhighlight %}  
 
-_**Set somaxconn**_  
-```sh
+_**Set somaxconn**_   
+{% highlight bash %}
 echo 65535 > /proc/sys/net/core/somaxconn
-```
-_**redis.conf**_   [for more detail](http://redis.io/topics/config)  
-```sh
+{% endhighlight %}  
+_**redis.conf**_   [for more detail](http://redis.io/topics/config)    
+{% highlight bash %}
 tcp-backlog 65535
 #**TODO**
 #To dump the dataset every 15 minutes (900 seconds) if at least one key changed, you can say:
@@ -82,44 +82,44 @@ tcp-backlog 65535
 #**TODO**
 #To tell OS to really really write the data to the disk, Redis needs to call the fsync() function right after the write call, #which can be slow.
 #appendfsync everysec
-```
+{% endhighlight %}  
 _**/etc/init.d/redis-server**_  
-```sh
+{% highlight bash %}
 sudo sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
 ulimit -n 65535
 ulimit -n >> /var/log/ulimit.log #Not required!
-```
+{% endhighlight %}  
 
 ###Redis Sentinel  
 _**install**_  
-```sh
+{% highlight bash %}
 wget https://raw.githubusercontent.com/ziyasal/redisetup/master/sentinel.sh
 sudo sh sentinel.sh  #Run install script
-```
+{% endhighlight %}  
 
 ###Monit  
 _**install**_  
-```sh
+{% highlight bash %}
 sudo apt-get install monit
-```
+{% endhighlight %}  
 _**update monit config file**_  
-```sh
+{% highlight bash %}
 nano /etc/monit/monitrc
-```
+{% endhighlight %}  
 _Add or update httpd settings_  
-```sh
+{% highlight bash %}
 set httpd port 8081 and
     use address localhost  # only accept connection from localhost
     allow localhost        # allow localhost to connect to the server and
     allow admin:monit      # require user "admin" with password "monit"
-```
+{% endhighlight %}  
 ###Apply Redis and Sentinel Configurations into Monit  
 _**Create redis.conf**_  
-```sh
+{% highlight bash %}
 nano /etc/monit/conf.d/redis.conf
-```
+{% endhighlight %}  
 Add following settings for more options [monit documentation](https://mmonit.com/monit/documentation/)  
-```sh
+{% highlight bash %}
 #Default settings
 #watch by pid
 check process redis-server
@@ -128,14 +128,14 @@ check process redis-server
     stop program = "/etc/init.d/redis-server stop"
     if failed host 127.0.0.1 port 6379 then restart
     if 5 restarts within 5 cycles then timeout
-```
+{% endhighlight %}  
 
 _**Create sentinel.conf**_  
-```sh
+{% highlight bash %}
 nano /etc/monit/conf.d/redis-sentinel.conf
-```
+{% endhighlight %}  
 Add following lines  
-```sh
+{% highlight bash %}
 #watch by process name TODO: pid file
 check process redis-sentinel
     matching "redis-sentinel"
@@ -143,11 +143,11 @@ check process redis-sentinel
     stop program = "/etc/init.d/redis-sentinel stop"
     if failed host 127.0.0.1 port 26379 then restart
     if 5 restarts within 5 cycles then timeout
-```
+{% endhighlight %}  
 
 ##System Side Settings  
 _**sysctl.conf**_  
-```sh
+{% highlight bash %}
 vm.overcommit_memory=1                # Linux kernel overcommit memory setting
 vm.swappiness=0                       # turn off swapping
 net.ipv4.tcp_sack=1                   # enable selective acknowledgements
@@ -159,45 +159,46 @@ net.ipv4.tcp_tw_recycle=1             # recycle sockets quickly
 net.ipv4.tcp_max_syn_backlog=65535    # backlog setting
 net.core.somaxconn=65535              # up the number of connections per port
 fs.file-max=65535
-```
+{% endhighlight %}  
 
 _**/etc/security/limits.conf**_  
-```sh
+{% highlight bash %}
 redis soft nofile 65535
 redis hard nofile 65535
-```
+{% endhighlight %} 
+
 Add following line  
-```sh
+{% highlight bash %}
 session required pam_limits.so
-```
+{% endhighlight %}  
 to  
-```sh
+{% highlight bash %}
 /etc/pam.d/common-session
 /etc/pam.d/common-session-noninteractive
-```
+{% endhighlight %}  
 
 ###Shortcuts  
 
 After executing the command shown below   
 
-```sh
+{% highlight bash %}
 monit monitor all
-```
+{% endhighlight %}  
 
 Now you can keep track of redis server and sentinel by monit   
 
-```sh
+{% highlight bash %}
 monit status
-```
+{% endhighlight %}  
 
 Get Master/Slave replication information  
 
-```sh
+{% highlight bash %}
 redis-cli -p 6379 info replication
-```
+{% endhighlight %}  
 
 Get Sentinel information  
 
-```sh
+{% highlight bash %}
 redis-cli -p 26379 info sentinel
-```
+{% endhighlight %}  
