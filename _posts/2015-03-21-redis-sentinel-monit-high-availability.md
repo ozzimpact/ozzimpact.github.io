@@ -24,7 +24,7 @@ Redis + Sentinel + Monit setup scripts and High Availability
 
 # Redis + Sentinel + Monit Setup  
 Redis + Sentinel + Monit Setup Scripts  
-> ##It is not production ready configuration yet! Work in progress..##  
+> **It is not production ready configuration yet! Work in progress..** 
 
 _**Edited Version**_  
 
