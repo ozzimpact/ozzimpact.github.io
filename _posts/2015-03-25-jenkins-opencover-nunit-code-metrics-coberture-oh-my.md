@@ -46,8 +46,8 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 • [OpenCover](https://github.com/OpenCover/opencove)  
 • [Metrics Power Tools](http://www.microsoft.com/en-us/download/confirmation.aspx?id=41647)  
 • [OpenCoverToCoberturaConverter](http://www.nuget.org/packages/OpenCoverToCoberturaConverter)  
-
-_**Info:** Extract all tools to ``C:\Tools\{toolname}\`` folder._
+• [NUnit](http://nunit.org/?p=download)  
+_**Info:** Extract all tools(Metrics Power Tools will be installed in Program) to ``C:\Tools\{toolname}\`` folder._
 
 Jenkins Settings  
 ---------------------------------------------------------
@@ -78,7 +78,7 @@ Configure ``Jenkins`` job to build source code using ``MSBuild``.
 {% highlight bash %}  
 {projectname}.sln
 {% endhighlight %}  
-![MSBUild Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-22-11.png)  
+![MSBUild Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-18-31.png)  
 
 _**OpenCover & NUnit**_  
 Add build step to generate ``OpenCover`` coverage results using ``NUnit`` test runner.  
