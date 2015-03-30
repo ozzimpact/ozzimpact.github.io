@@ -9,81 +9,9 @@ comments: true
 mathjax: 
 ---
 
-Redis + Sentinel + Monit setup scripts and High Availability   
-
- In this post, we will be talking about how to provide High Availability using ```Redis``` and helper tools; ```Sentinel``` and ```Monit```.      
- • First of all, let's talk about what Sentinel and Monit are and what they do.    
- • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
- • As an initial state, a master and a slave have to be chosen.    
- • After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.    
- • We want to utilize our server as much as we can, so here are the tricks to accomplish this goal;  
- • Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS.    
-{% highlight bash %}
-echo 65535 > /proc/sys/net/core/somaxconn
-{% endhighlight %}         
- • Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf, tcp-backlog``` should set to ```65535``` and in ```redis-server, ulimit``` should set to ```65535``` and also this command should be executed.      
-{% highlight bash %}  
-sudo sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"  
-ulimit -n 65535  
-ulimit -n >> /var/log/ulimit.log #Not required!".  
-{% endhighlight %}        
- • Then Redis Sentinel and Monit should be installed on every instances with script defined below.  
- • After installing Monit, httpd settings should be updated. Then Redis and Sentinel configurations should be applied into Monit.  
-{% highlight bash %}  
-set httpd port 8081 and
-    use address localhost  # only accept connection from localhost  
-    allow localhost        # allow localhost to connect to the server and  
-    allow admin:monit      # require user "admin" with password "monit
-{% endhighlight %}       
- • In Monit configuration ```redis.conf``` is created to watch Redis instances.  
-{% highlight bash %}  
-#Default settings
-#watch by pid
-check process redis-server
-    with pidfile "/var/run/redis.pid"
-    start program = "/etc/init.d/redis-server start"
-    stop program = "/etc/init.d/redis-server stop"
-    if failed host 127.0.0.1 port 6379 then restart
-    if 5 restarts within 5 cycles then timeout
-{% endhighlight %}  
- • And created ```sentinel.conf``` to watch Redis Sentinel.    
-{% highlight bash %}  
-#watch by process name TODO: pid file.
-check process redis-sentinel
-    matching "redis-sentinel"
-    start program = "/etc/init.d/redis-sentinel start"
-    stop program = "/etc/init.d/redis-sentinel stop"
-    if failed host 127.0.0.1 port 26379 then restart
-    if 5 restarts within 5 cycles then timeout
-{% endhighlight %}  
- • In the system level, settings which called  ```sysctl.conf```  should be reconfigured.  
- {% highlight bash %}  
-vm.overcommit_memory=1                # Linux kernel overcommit memory setting
-vm.swappiness=0                       # turn off swapping
-net.ipv4.tcp_sack=1                   # enable selective acknowledgements
-net.ipv4.tcp_timestamps=1             # needed for selective acknowledgements
-net.ipv4.tcp_window_scaling=1         # scale the network window
-net.ipv4.tcp_congestion_control=cubic # better congestion algorythm
-net.ipv4.tcp_syncookies=1             # enable syn cookied
-net.ipv4.tcp_tw_recycle=1             # recycle sockets quickly
-net.ipv4.tcp_max_syn_backlog=65535    # backlog setting
-net.core.somaxconn=65535              # up the number of connections per port
-fs.file-max=65535
-{% endhighlight %}  
- • And also ```/etc/security/limits.conf``` should be reconfigured.  
- {% highlight bash %}  
-redis soft nofile 65535
-redis hard nofile 65535
-{% endhighlight %}  
- • Finally, following command should be added to ```/etc/pam.d/common-session``` and ```/etc/pam.d/common-session-noninteractive```.  
- {% highlight bash %}  
-session required pam_limits.so
-{% endhighlight %}  
-
-
-_**(Edited Version) Work in progress**_  
-
+Redis + Sentinel + Monit setup scripts and High Availability  
 # Table of Contents
+* [Introduction](#introduction)  
 * [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
     * [Redis Master/Slave](#redis-masterslave)  
     * [Redis Sentinel](#redis-sentinel)  
@@ -91,11 +19,16 @@ _**(Edited Version) Work in progress**_
     * [Apply Redis and Sentinel Configurations into Monit](#apply-redis-and-sentinel-configurations-into-monit)  
 * [System Side Settings](#system-side-settings)  
 * [Shortcuts](#shortcuts)  
-
-# Redis + Sentinel + Monit Setup  
-Redis + Sentinel + Monit Setup Scripts  
+ 
 _**WARNING:**_ _It is not production ready configuration yet! Work in progress.._  
 
+###Introduction  
+ In this post, we will be talking about how to provide High Availability using ```Redis``` and helper tools; ```Sentinel``` and ```Monit```.      
+ • First of all, let's talk about what Sentinel and Monit are and what they do.    
+ • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
+ • As an initial state, a master and a slave have to be chosen.    
+ • After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.    
+ • We want to utilize our server as much as we can, so here are the tricks to accomplish this goal;  
 
 ###Redis Master/Slave  
 
@@ -135,7 +68,8 @@ wget https://raw.githubusercontent.com/ziyasal/redisetup/master/member.sh
 sudo sh member.sh #Run install script
 {% endhighlight %}  
 
-_**Set somaxconn**_   
+_**Set somaxconn**_  
+Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS. 
 {% highlight bash %}
 echo 65535 > /proc/sys/net/core/somaxconn
 {% endhighlight %}  
@@ -153,6 +87,7 @@ tcp-backlog 65535
 #appendfsync everysec
 {% endhighlight %}  
 _**/etc/init.d/redis-server**_  
+Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf, tcp-backlog``` should set to ```65535``` and in ```redis-server, ulimit``` should set to ```65535``` and also this command should be executed.
 {% highlight bash %}
 sudo sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
 ulimit -n 65535
@@ -171,6 +106,9 @@ _**install**_
 {% highlight bash %}
 sudo apt-get install monit
 {% endhighlight %}  
+
+After installing Monit, httpd settings should be updated. Then Redis and Sentinel configurations should be applied into Monit. 
+
 _**update monit config file**_  
 {% highlight bash %}
 nano /etc/monit/monitrc
@@ -184,6 +122,7 @@ set httpd port 8081 and
 {% endhighlight %}  
 ###Apply Redis and Sentinel Configurations into Monit  
 _**Create redis.conf**_  
+In Monit configuration ```redis.conf``` is created to watch Redis instances.  
 {% highlight bash %}
 nano /etc/monit/conf.d/redis.conf
 {% endhighlight %}  
@@ -200,6 +139,7 @@ check process redis-server
 {% endhighlight %}  
 
 _**Create sentinel.conf**_  
+And created ```sentinel.conf``` to watch Redis Sentinel.   
 {% highlight bash %}
 nano /etc/monit/conf.d/redis-sentinel.conf
 {% endhighlight %}  
@@ -215,6 +155,7 @@ check process redis-sentinel
 {% endhighlight %}  
 
 ##System Side Settings  
+In the system level, settings which called  ```sysctl.conf```  should be reconfigured.  
 _**sysctl.conf**_  
 {% highlight bash %}
 vm.overcommit_memory=1                # Linux kernel overcommit memory setting
@@ -236,7 +177,7 @@ redis soft nofile 65535
 redis hard nofile 65535
 {% endhighlight %} 
 
-Add following line  
+Finally, following command should be added to ```/etc/pam.d/common-session``` and ```/etc/pam.d/common-session-noninteractive```.   
 {% highlight bash %}
 session required pam_limits.so
 {% endhighlight %}  
