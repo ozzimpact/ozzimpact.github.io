@@ -9,7 +9,7 @@ comments: true
 mathjax: 
 ---
 
-Redis + Sentinel + Monit setup scripts and High Availability    
+Redis + Sentinel + Monit setup scripts and High Availability      
 # Table of Contents  
 * [Introduction](#introduction)  
 * [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
