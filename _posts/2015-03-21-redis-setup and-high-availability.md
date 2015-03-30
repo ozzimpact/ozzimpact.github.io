@@ -10,15 +10,15 @@ mathjax:
 ---
 
 Redis + Sentinel + Monit setup scripts and High Availability      
-# Table of Contents  
-* [Introduction](#introduction)  
-* [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
-    * [Redis Master/Slave](#redis-masterslave)  
-    * [Redis Sentinel](#redis-sentinel)  
-    * [Monit](#monit)  
-    * [Apply Redis and Sentinel Configurations into Monit](#apply-redis-and-sentinel-configurations-into-monit)  
-* [System Side Settings](#system-side-settings)  
-* [Shortcuts](#shortcuts)  
+# Table of Contents    
+• [Introduction](#introduction)  
+• [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
+    • [Redis Master/Slave](#redis-masterslave)  
+    • [Redis Sentinel](#redis-sentinel)  
+    • [Monit](#monit)  
+    • [Apply Redis and Sentinel Configurations into Monit](#apply-redis-and-sentinel-configurations-into-monit)  
+• [System Side Settings](#system-side-settings)  
+• [Shortcuts](#shortcuts)  
  
 _**WARNING:**_ _It is not production ready configuration yet! Work in progress.._  
 
