@@ -13,15 +13,15 @@ Redis + Sentinel + Monit setup scripts and High Availability
 
  In this post, we will be talking about how to provide High Availability using ```Redis``` and helper tools; ```Sentinel``` and ```Monit```.      
  • First of all, let's talk about what Sentinel and Monit are and what they do.    
-    • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
+ • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
  • As an initial state, a master and a slave have to be chosen.    
  • After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.    
  • We want to utilize our server as much as we can, so here are the tricks to accomplish this goal;  
-    • Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS.    
+ • Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS.    
 {% highlight bash %}
 echo 65535 > /proc/sys/net/core/somaxconn
 {% endhighlight %}         
-    • Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf, tcp-backlog``` should set to ```65535``` and in ```redis-server, ulimit``` should set to ```65535``` and also this command should be executed.      
+ • Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf, tcp-backlog``` should set to ```65535``` and in ```redis-server, ulimit``` should set to ```65535``` and also this command should be executed.      
 {% highlight bash %}  
 sudo sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"  
 ulimit -n 65535  
