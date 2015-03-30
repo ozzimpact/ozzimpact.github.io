@@ -21,7 +21,7 @@ Redis + Sentinel + Monit setup scripts and High Availability
 {% highlight bash %}
 echo 65535 > /proc/sys/net/core/somaxconn
 {% endhighlight %}         
-    • Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf``` ```tcp-backlog``` should set to ```65535``` and in ```redis-server``` ```ulimit``` should set to ```65535``` and also this command should be executed      
+    • Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf```, ```tcp-backlog``` should set to ```65535``` and in ```redis-server```, ```ulimit``` should set to ```65535``` and also this command should be executed.      
 {% highlight bash %}  
 sudo sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"  
 ulimit -n 65535  
