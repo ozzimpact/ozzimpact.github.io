@@ -9,8 +9,9 @@ comments: true
 mathjax: 
 ---
 
-Redis + Sentinel + Monit setup scripts and High Availability      
-# Table of Contents    
+Redis + Sentinel + Monit setup scripts and High Availability  
+
+##Table of Contents    
 • [Introduction](#introduction)  
 • [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
     • [Redis Master/Slave](#redis-masterslave)  
