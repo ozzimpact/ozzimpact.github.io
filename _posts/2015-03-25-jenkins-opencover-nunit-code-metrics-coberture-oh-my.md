@@ -66,9 +66,9 @@ C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis T
 Create Jenkins Build Job  
 ---------------------------------------------------------
 **Source Code Management Settings**  
-Configure ``Jenkins`` job to get source code from ``SCM`` repository.  
+Configure ``Jenkins`` job to get source code from ``Git`` repository.  
 {% highlight bash %}  
-https://{scm}/{projectname}.git
+https://github.com/{projectname}.git
 {% endhighlight %}  
 ![Jenkins Job Source Control Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-21-27.png)  
 
