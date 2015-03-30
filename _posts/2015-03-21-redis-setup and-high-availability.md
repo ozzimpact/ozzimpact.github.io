@@ -12,30 +12,30 @@ mathjax:
 Redis + Sentinel + Monit setup scripts and High Availability   
 
  In this post, we will be talking about how to provide High Availability using ```Redis``` and helper tools; ```Sentinel``` and ```Monit```.      
- - First of all, let's talk about what Sentinel and Monit are and what they do.    
-  - Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
- - As an initial state, a master and a slave have to be chosen.    
- - After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.    
- - We want to utilize our server as much as we can, so here are the tricks to accomplish this goal;  
-   - Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS.    
+ • First of all, let's talk about what Sentinel and Monit are and what they do.    
+   • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
+ • As an initial state, a master and a slave have to be chosen.    
+ • After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.    
+ • We want to utilize our server as much as we can, so here are the tricks to accomplish this goal;  
+   • Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS.    
 {% highlight bash %}
 echo 65535 > /proc/sys/net/core/somaxconn
 {% endhighlight %}         
-   - Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf``` ```tcp-backlog``` should set to ```65535``` and in ```redis-server``` ```ulimit``` should set to ```65535``` and also this command should be executed      
+   • Above step should be applied to ```redis.conf``` and ```redis-server``` too. In ```redis.conf``` ```tcp-backlog``` should set to ```65535``` and in ```redis-server``` ```ulimit``` should set to ```65535``` and also this command should be executed      
 {% highlight bash %}  
 sudo sh -c "echo never > /sys/kernel/mm/transparent_hugepage/enabled"  
 ulimit -n 65535  
 ulimit -n >> /var/log/ulimit.log #Not required!".  
 {% endhighlight %}        
- - Then Redis Sentinel and Monit should be installed on every instances with script defined below.  
- - After installing Monit, httpd settings should be updated. Then Redis and Sentinel configurations should be applied into Monit.  
+ • Then Redis Sentinel and Monit should be installed on every instances with script defined below.  
+ • After installing Monit, httpd settings should be updated. Then Redis and Sentinel configurations should be applied into Monit.  
 {% highlight bash %}  
 set httpd port 8081 and
     use address localhost  # only accept connection from localhost  
     allow localhost        # allow localhost to connect to the server and  
     allow admin:monit      # require user "admin" with password "monit
 {% endhighlight %}       
- - In Monit configuration '''redis.conf''' is created to watch Redis instances.  
+ • In Monit configuration '''redis.conf''' is created to watch Redis instances.  
 {% highlight bash %}  
 #Default settings
 #watch by pid
@@ -46,7 +46,7 @@ check process redis-server
     if failed host 127.0.0.1 port 6379 then restart
     if 5 restarts within 5 cycles then timeout
 {% endhighlight %}  
- - And created ```sentinel.conf``` to watch Redis Sentinel.    
+ • And created ```sentinel.conf``` to watch Redis Sentinel.    
 {% highlight bash %}  
 #watch by process name TODO: pid file.
 check process redis-sentinel
@@ -56,7 +56,7 @@ check process redis-sentinel
     if failed host 127.0.0.1 port 26379 then restart
     if 5 restarts within 5 cycles then timeout
 {% endhighlight %}  
- - In the system level, settings which called  ```sysctl.conf```  should be reconfigured.  
+ • In the system level, settings which called  ```sysctl.conf```  should be reconfigured.  
  {% highlight bash %}  
 vm.overcommit_memory=1                # Linux kernel overcommit memory setting
 vm.swappiness=0                       # turn off swapping
@@ -70,12 +70,12 @@ net.ipv4.tcp_max_syn_backlog=65535    # backlog setting
 net.core.somaxconn=65535              # up the number of connections per port
 fs.file-max=65535
 {% endhighlight %}  
- - And also ```/etc/security/limits.conf``` should be reconfigured.  
+ • And also ```/etc/security/limits.conf``` should be reconfigured.  
  {% highlight bash %}  
 redis soft nofile 65535
 redis hard nofile 65535
 {% endhighlight %}  
- - Finally, following command should be added to ```/etc/pam.d/common-session``` and ```/etc/pam.d/common-session-noninteractive```.  
+ • Finally, following command should be added to ```/etc/pam.d/common-session``` and ```/etc/pam.d/common-session-noninteractive```.  
  {% highlight bash %}  
 session required pam_limits.so
 {% endhighlight %}  
