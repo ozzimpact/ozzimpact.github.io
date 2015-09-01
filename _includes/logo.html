@@ -1,1 +1,11 @@
-{% if site.logo %}<a class="notepad-blog-logo" href="{{ site.url }}"><img src="{{ site.url }}/images/elements/{{ site.logo }}" alt="Blog Logo" /></a>{% else %}<a class="notepad-blog-logo" href="{{ site.url }}"><img src="{{ site.url }}/images/elements/logo.png" alt="Blog Logo" />{% endif %}
+{% if site.logo %}
+
+  <div class="small-10 medium-3 large-2 columns datetime">
+    <a class="notepad-blog-logo" href="{{ site.url }}">
+    <img src="{{ site.url }}/images/elements/{{ site.logo }}" alt="Blog Logo" />
+    </a>
+  </div>
+{% else %}
+    <a class="notepad-blog-logo" href="{{ site.url }}">
+    <img src="{{ site.url }}/images/elements/logo.png" alt="Blog Logo" />
+{% endif %}
