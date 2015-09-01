@@ -3,11 +3,12 @@
                 <div class="bg-img">{% if page.imagefeature %}<img src="{{ site.url }}/images/covers/{{ page.imagefeature }}">{% endif %}</div>
                 
                 {% if page.covereffect == "slice" or page.covereffect == "push" %}<div class="notepad-post-menu-header">{% else %}<div class="notepad-post-menu-header transparent">{% endif %}
-                    
+                     <article class="animated-post notepad-index-post post row">
                     {% include logo.html %}
 
 
 {% include navigation.html %}
+</article>
  <div class="clearfix"></div>
                 </div>
                 {% if page.covereffect == "push" %}<div class="notepad-post-title bg-check">
@@ -18,11 +19,12 @@
             
   
             <div class="notepad-post-menu-header">
-                
+                 <article class="animated-post notepad-index-post post row">
                 {% include logo.html %}
 
 
 {% include navigation.html %}
+</article>
  <div class="clearfix"></div>
             </div>
             <div class="notepad-post-title">
