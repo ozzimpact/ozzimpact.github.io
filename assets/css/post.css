@@ -370,12 +370,12 @@ html, body, .notepad-post-container, .notepad-post-header {
     @media only screen and (min-width: 70em) {
       .notepad-page-title h1,
       .notepad-post-title-simple h1 {
-        padding-top: 6.875rem;
+        padding-top: 2.1rem;
         padding-bottom: 6.875rem; } }
     @media only screen and (min-width: 90em) {
       .notepad-page-title h1,
       .notepad-post-title-simple h1 {
-        font-size: 3.3125rem;
+        font-size: 2.1rem;
         padding-top: 8.125rem;
         padding-bottom: 8.125rem; } }
   .notepad-page-title .notepad-post-meta-simple,
