@@ -16,29 +16,16 @@ I am a curious, self-learner, lover of open source, automation-obsessed and poly
 ### Briefly;
 _curious, self-learner, lover of open source, automation-obsessed, polyglot and platform independent_
 
-### My Technical Expertise
-- C#
-- Asp.NET MVC / Web API
-- Node.js
-- Mono / Xamarin Stack
-- Entity Framework / Dapper
-- SignalR / Socket.io
-- WCF
-- WPF
-- Python
-- Angular.js
-- Elasticsearch / Solr
-- TDD - DDD
-- Ionic / Cordova
-- Git / Subversion
-- Jenkins / Hudson
-- Octopus Deploy
-- MongoDB
-- Redis
-- HTML / CSS / Less
-- jQuery / Mobile
-- SOA
-- InfluxDB
-- Gulp.js
-- RabbitMQ
-- Nginx
+### My Technical Expertise  
+
+| .NET Stack           	| Node.js /Python Stack 	| Tools                	|
+|----------------------	|-----------------------	|----------------------	|
+| C#                   	| Node.js               	| Docker               	|
+| Asp.NET Stack        	| Socket.io             	| Elasticsearch / Solr 	|
+| Mono / Xamarin Stack 	| Gulp.js               	| TDD                  	|
+| EF / Dapper /OrmLite 	| Express.js            	| Ionic / Cordova      	|
+| SignalR / Socket.io  	| Python                	| Git / TFS            	|
+| WCF                  	| Linux                 	| Jenkins / Hudson     	|
+| Redis                	| MongoDB               	| Octopus Deploy       	|
+| Angular.js 1 / 2     	| RethinkDB             	| NewRelic             	|
+| jQuery / Mobile      	| RabbitMQ              	| NGinx                	|
