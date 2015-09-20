@@ -18,6 +18,7 @@ _curious, self-learner, lover of open source, automation-obsessed, polyglot and 
 
 ### My Technical Expertise  
 
+|                      	|            	|                      	|
 |----------------------	|------------	|----------------------	|
 | C#                   	| Node.js    	| Docker               	|
 | Asp.NET Stack        	| Socket.io  	| Elasticsearch / Solr 	|
