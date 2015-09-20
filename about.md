@@ -18,14 +18,15 @@ _curious, self-learner, lover of open source, automation-obsessed, polyglot and 
 
 ### My Technical Expertise  
 
-| .NET Stack           	| Node.js /Python Stack 	| Tools                	|
-|----------------------	|-----------------------	|----------------------	|
-| C#                   	| Node.js               	| Docker               	|
-| Asp.NET Stack        	| Socket.io             	| Elasticsearch / Solr 	|
-| Mono / Xamarin Stack 	| Gulp.js               	| TDD                  	|
-| EF / Dapper /OrmLite 	| Express.js            	| Ionic / Cordova      	|
-| SignalR / Socket.io  	| Python                	| Git / TFS            	|
-| WCF                  	| Linux                 	| Jenkins / Hudson     	|
-| Redis                	| MongoDB               	| Octopus Deploy       	|
-| Angular.js 1 / 2     	| RethinkDB             	| NewRelic             	|
-| jQuery / Mobile      	| RabbitMQ              	| NGinx                	|
+|                      	|            	|                      	|
+|----------------------	|------------	|----------------------	|
+| C#                   	| Node.js    	| Docker               	|
+| Asp.NET Stack        	| Socket.io  	| Elasticsearch / Solr 	|
+| Mono / Xamarin Stack 	| Gulp.js    	| Nginx                	|
+| EF / Dapper /OrmLite 	| Express.js 	| Ionic / Cordova      	|
+| SignalR / Socket.io  	| Python     	| Git / TFS            	|
+| WCF                  	| Linux      	| Jenkins / Hudson     	|
+| Redis                	| MongoDB    	| Octopus Deploy       	|
+| Angular.js 1 / 2     	| Celery     	| NewRelic             	|
+| jQuery               	| Browserify 	| RabbitMQ             	|
+| InfluxDB             	| Vert.x     	|                      	|
