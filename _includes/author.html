@@ -6,22 +6,12 @@
 
                         <img src="{{ site.url }}/images/avatars/{{ site.owner.avatar }}" class="notepad-post-author-avatar" alt="{{ site.owner.name }}">
 
-                        {% if post.cooperated == true %}
-                        <span class="author-label">Author</span>
-                        <h1><a href="{{ site.url }}/author/{{ site.owner.name }}" class="author-link-name">{{ site.owner.name }}</a></h1>
-                        <h1><a href="{{ site.url }}/author/{{ site.helper.name }}" class="author-link-name">{{ site.helper.name }}</a></h1>
-                        <p><a href="mailto:{{ site.owner.email }}" class="author-email">{{ site.owner.email }}</a></p>
-                        <p><a href="mailto:{{ site.helper.email }}" class="author-email">{{ site.helper.email }}</a></p>
 
-                        <p>{{site.owner.description}}
-                        <p>{{ site.helper.description }}</p>
-                        {% elsif %}
                         <span class="author-label">Author</span>
                         <h1><a href="{{ site.url }}/author/{{ site.owner.name }}" class="author-link-name">{{ site.owner.name }}</a></h1>
                         <p><a href="mailto:{{ site.owner.email }}" class="author-email">{{ site.owner.email }}</a></p>
 
                         <p>{{site.owner.description}}
-                        {% endif %}
                 </section>
             </div>
         </div>
