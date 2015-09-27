@@ -2,27 +2,29 @@
 layout: post
 title: "Useful Jenkins Plugins and Configuration"
 description: Jenkins, OpenCover, NUnit, Code Metrics, Cobertura Oh my!
-headline: 
+headline:
 category: development
 tags: [jenkins, opencover, code, metrics, cobertura, ci, git, continuous integration]
+cooperated:true
 comments: true
-mathjax: 
+mathjax:
+
 ---
 
 ## Jenkins, OpenCover, NUnit, Code Metrics, Cobertura Oh my!  
-In this tutorial, we will be talking about how to provide ```CI(Continuous Integration)``` for ```.NET``` projects using ```Jenkins```. And how to be informed about code and test coverage and code metrics.   
+In this tutorial, we will be talking about how to provide ```CI(Continuous Integration)``` for ```.NET``` projects using ```Jenkins```. And how to be informed about code and test coverage and code metrics.
 _**Pre-Build**_  
  • Ensure that Jenkins and Git installed properly with necessary plugins and tools which are defined below.(_**Info**: Extract all tools to ``C:\Tools\{toolname}\`` folder._)  
- • Jenkins settings should be configured to be able to run C# project and code metrics tool which is needed to prepare report, properly. Meaning by that, MSBuild and Visual Studio Code Metrics Tool should be registered.   
-_**Build**_   
+ • Jenkins settings should be configured to be able to run C# project and code metrics tool which is needed to prepare report, properly. Meaning by that, MSBuild and Visual Studio Code Metrics Tool should be registered.
+_**Build**_
  • Source code should be pulled to Jenkins from git or any other scm repository.(In this example Github is used.) A Jenkins job is created for this action.  
  • After pulling the project, another Jenkins job is configured to build solution using MSBuildPlugin which is installed earlier.  
  • Afterwards, build step should be set to generate OpenCover coverage result using NUnit test runner and another build step should be added to get OpenCover coverage result as an HTML file.  
- • If you want to convert OpenCover coverage results to Cobertura reports, another build step should be added. There is a nuget package to make this easier which is OpenCoverToCoberturaConverter. ([Why Cobertura?](https://github.com/cobertura/cobertura/wiki/FAQ))    
+ • If you want to convert OpenCover coverage results to Cobertura reports, another build step should be added. There is a nuget package to make this easier which is OpenCoverToCoberturaConverter. ([Why Cobertura?](https://github.com/cobertura/cobertura/wiki/FAQ))
  • After reports, another build step is added to calculate code metrics using VS Code Metrics Power Tool.  
  _**Post-Build**_  
- • As a post-build action, publishing Cobertura coverage report step should be added using Cobertura for Jenkins.   
- • And also Jenkins provides publishing reports as HTML files. Again, another post-build step should be added for this using HtmlPublisherPlugin.   
+ • As a post-build action, publishing Cobertura coverage report step should be added using Cobertura for Jenkins.
+ • And also Jenkins provides publishing reports as HTML files. Again, another post-build step should be added for this using HtmlPublisherPlugin.
  • To publish NUnit test results as a post-build action, NUnitPlugin is configured.  
  • To publish code metrics as a post-build action, Record VS Code Metrics Power Tool Report is configured.  
 
@@ -36,9 +38,9 @@ Download and install ``git`` from [link](https://msysgit.github.io/)
 **Jenkins Plugins**  
 • [Git](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin)  
 • [MsBuildPlugin](https://wiki.jenkins-ci.org/display/JENKINS/MSBuild+Plugin)  
-• [HtmlPublisherPlugin](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin)   
-• [NUnitPlugin](https://wiki.jenkins-ci.org/display/JENKINS/NUnit+Plugin)    
-• [Visual Studio Code Metrics](https://wiki.jenkins-ci.org/display/JENKINS/Visual+Studio+Code+Metrics+Plugin)    
+• [HtmlPublisherPlugin](https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin)
+• [NUnitPlugin](https://wiki.jenkins-ci.org/display/JENKINS/NUnit+Plugin)
+• [Visual Studio Code Metrics](https://wiki.jenkins-ci.org/display/JENKINS/Visual+Studio+Code+Metrics+Plugin)
 • [Cobertura](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)  
 
 **Tools**  
@@ -51,13 +53,13 @@ _**Info:** Extract all tools(Metrics Power Tools will be installed in Program Fi
 
 Jenkins Settings  
 ---------------------------------------------------------
-**Register MsBuild** 
+**Register MsBuild**
 {% highlight bash %}
 C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe
 {% endhighlight %}  
 ![Jenkins MSBuild Settings]({{ site.url }}/images/post/2015-03-20/2015-03-25_20-39-27.png)  
 
-**Register Visual Studio Code Metrics Tool**   
+**Register Visual Studio Code Metrics Tool**
 {% highlight bash %}
 C:\Program Files (x86)\Microsoft Visual Studio 12.0\Team Tools\Static Analysis Tools\FxCop\metrics.exe
 {% endhighlight %}  
@@ -99,7 +101,7 @@ Add build step to convert ``opencover`` results to ``cobertura`` reports.
 {% highlight bash %}
 "C:\Tools\opencover_to_cobertura_converter\OpenCoverToCoberturaConverter.exe" -input:%JOB_NAME%Coverage.xml -output:%JOB_NAME%Cobertura.xml -sources:%WORKSPACE%
 {% endhighlight %}
-![OpenCoverToCoberturaConverter Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-18-51.png) 
+![OpenCoverToCoberturaConverter Settings]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-18-51.png)
 
 _**VS Code Metrics Power Tool**_  
 Add build step to calculate ``Code Metrics``.  
@@ -113,7 +115,7 @@ _**Publish Cobertura Coverage Report**_
 {% highlight bash %}
 {YourProjectName}Cobertura.xml
 {% endhighlight %}
-Add post-build step to view code coverage results as ``Cobertura`` report. 
+Add post-build step to view code coverage results as ``Cobertura`` report.
 ![Publish Cobertura Coverage Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-11.png)  
 
 _**Publish Html Reports**_  
@@ -122,7 +124,7 @@ CodeCoverageHTML   # HTML directory to archive
 index.htm          # report index page
 Code Coverage      # report title
 {% endhighlight %}
-Add post-build step to view code coverage results as html. 
+Add post-build step to view code coverage results as html.
 ![Publish Html Reports]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-25_22-20-43.png)  
 
 _**Publish NUnit Test Results Report**_  
@@ -151,4 +153,4 @@ Result
 ![Code Coverage - Cobertura]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-25-48.png)  
 
 **Metrics**  
-![Metrics]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-05.png) 
+![Metrics]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-05.png)

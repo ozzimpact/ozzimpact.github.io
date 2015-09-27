@@ -6,7 +6,7 @@
 
                         <img src="{{ site.url }}/images/avatars/{{ site.owner.avatar }}" class="notepad-post-author-avatar" alt="{{ site.owner.name }}">
 
-                        {% if post.cooperated %}
+                        {% if post.cooperated == true %}
                         <span class="author-label">Author</span>
                         <h1><a href="{{ site.url }}/author/{{ site.owner.name }}" class="author-link-name">{{ site.owner.name }}</a></h1>
                         <h1><a href="{{ site.url }}/author/{{ site.helper.name }}" class="author-link-name">{{ site.helper.name }}</a></h1>

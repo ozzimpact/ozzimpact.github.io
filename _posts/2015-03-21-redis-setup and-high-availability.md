@@ -2,16 +2,17 @@
 layout: post
 title: "Redis High Availability"
 description: Redis High Availability
-headline: 
+headline:
 category: development
 tags: [redis, monit, sentinel, high-availability]
+cooperated:true
 comments: true
-mathjax: 
+mathjax:
 ---
 
 Redis + Sentinel + Monit setup scripts and High Availability  
 
-##Table of Contents    
+##Table of Contents
 - [Introduction](#introduction)  
 - [Redis + Sentinel + Monit Setup](#redis--sentinel--monit-setup)  
   - [Redis Master/Slave](#redis-masterslave)  
@@ -20,20 +21,20 @@ Redis + Sentinel + Monit setup scripts and High Availability
   - [Apply Redis and Sentinel Configurations into Monit](#apply-redis-and-sentinel-configurations-into-monit)  
 - [System Side Settings](#system-side-settings)
 - [Shortcuts](#shortcuts)  
- 
+
 _**WARNING:**_ _It is not production ready configuration yet! Work in progress.._  
 
 ###Introduction  
- In this post, we will be talking about how to provide High Availability using ```Redis``` and helper tools; ```Sentinel``` and ```Monit```.      
- • First of all, let's talk about what Sentinel and Monit are and what they do.    
- • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).    
- • As an initial state, a master and a slave have to be chosen.    
- • After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.    
+ In this post, we will be talking about how to provide High Availability using ```Redis``` and helper tools; ```Sentinel``` and ```Monit```.
+ • First of all, let's talk about what Sentinel and Monit are and what they do.
+ • Briefly Sentinel manages all redis instances(slaves and masters). And Monit shows the status of sentinels and redis instances.For more; [Sentinel](http://redis.io/topics/sentinel) , [Monit](http://mmonit.com/monit/).
+ • As an initial state, a master and a slave have to be chosen.
+ • After that, ```master.sh``` should be installed on master instance and ```member.sh``` should be installed on slave instance. Necessary scripts are defined below.
  • We want to utilize our server as much as we can, so here are the tricks to accomplish this goal;  
 
 ###Redis Master/Slave  
 
-**To Install Master**   
+**To Install Master**
 Edit ```master.sh``` file to set configurations (redis version,instance name, port);  
 {% highlight bash %}
 # Defaults
@@ -50,7 +51,7 @@ wget https://raw.githubusercontent.com/ziyasal/redisetup/master/master.sh
 sudo sh master.sh #Run install script
 {% endhighlight %}  
 
-**To Install Slave**   
+**To Install Slave**
 Edit ```member.sh``` file to set configurations (redis version,instance name, port, master ip, master port);  
 {% highlight bash %}
 # Defaults
@@ -70,11 +71,11 @@ sudo sh member.sh #Run install script
 {% endhighlight %}  
 
 _**Set somaxconn**_  
-Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS. 
+Set the ```somaxconn``` to unsigned short limit ```65535``` which is maximum supported connection number by OS.
 {% highlight bash %}
 echo 65535 > /proc/sys/net/core/somaxconn
 {% endhighlight %}  
-_**redis.conf**_   [for more detail](http://redis.io/topics/config)    
+_**redis.conf**_   [for more detail](http://redis.io/topics/config)
 {% highlight bash %}
 tcp-backlog 65535
 #**TODO**
@@ -108,7 +109,7 @@ _**install**_
 sudo apt-get install monit
 {% endhighlight %}  
 
-After installing Monit, httpd settings should be updated. Then Redis and Sentinel configurations should be applied into Monit. 
+After installing Monit, httpd settings should be updated. Then Redis and Sentinel configurations should be applied into Monit.
 
 _**update monit config file**_  
 {% highlight bash %}
@@ -140,7 +141,7 @@ check process redis-server
 {% endhighlight %}  
 
 _**Create sentinel.conf**_  
-And created ```sentinel.conf``` to watch Redis Sentinel.   
+And created ```sentinel.conf``` to watch Redis Sentinel.
 {% highlight bash %}
 nano /etc/monit/conf.d/redis-sentinel.conf
 {% endhighlight %}  
@@ -176,9 +177,9 @@ _**/etc/security/limits.conf**_
 {% highlight bash %}
 redis soft nofile 65535
 redis hard nofile 65535
-{% endhighlight %} 
+{% endhighlight %}
 
-Finally, following command should be added to ```/etc/pam.d/common-session``` and ```/etc/pam.d/common-session-noninteractive```.   
+Finally, following command should be added to ```/etc/pam.d/common-session``` and ```/etc/pam.d/common-session-noninteractive```.
 {% highlight bash %}
 session required pam_limits.so
 {% endhighlight %}  
@@ -190,13 +191,13 @@ to
 
 ###Shortcuts  
 
-After executing the command shown below   
+After executing the command shown below
 
 {% highlight bash %}
 monit monitor all
 {% endhighlight %}  
 
-Now you can keep track of redis server and sentinel by monit   
+Now you can keep track of redis server and sentinel by monit
 
 {% highlight bash %}
 monit status
