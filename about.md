@@ -13,8 +13,8 @@ published: true
 ---
 Software Developer, Istanbul/Turkey.
 
-Now working as a Software Developer in [Trendyol.com](http://www.trendyol.com/).
+Now working as a Software Developer at [Trendyol.com](http://www.trendyol.com/).
 
 ### Contact me
 
-{% if site.footer-links.email %}<a href="mailto:{{ site.footer-links.email }}">{{ site.footer-links.email }}</a>{% endif %}
+<a href="mailto:{{ site.owner.email }}">{{ site.owner.email }}</a>
