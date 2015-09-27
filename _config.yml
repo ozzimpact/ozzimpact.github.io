@@ -17,6 +17,10 @@ author_bg:		  newyork.jpg
 url:              http://ozzimpact.github.io
 
 # Owner/author information
+helper:
+  site: http://ziyasal.github.io
+  name: Ziya SARIKAYA
+
 owner:
   name:           Oguzhan DEMIR
   avatar:         http://www.gravatar.com/avatar/51204bdf27dd63af84e4f1f6b491ce81.png
