@@ -2,16 +2,19 @@
 layout: page
 permalink: /about/
 title: About
-tags: 
-  - Ziya
-  - SARIKAYA
-  - ziyasal
+tags:
+  - Oguzhan
+  - DEMIR
+  - ozzimpact
 imagefeature: fourseasons.jpg
 chart: true
 charttype: pie
 published: true
 ---
-I am a curious, self-learner, lover of open source, automation-obsessed and polyglot software architect/dev/ops living in the Istanbul who's passionate about researching and developing applications for web and mobile devices.
+Software Developer, Istanbul/Turkey.
 
-### Briefly;
-_curious, self-learner, lover of open source, automation-obsessed, polyglot and platform independent_
+Now working as a Software Developer in [Trendyol.com](http://www.trendyol.com/).
+
+### Contact me
+
+{% if site.footer-links.email %}<a href="mailto:{{ site.footer-links.email }}">{{ site.footer-links.email }}</a>{% endif %}
