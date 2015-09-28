@@ -235,8 +235,8 @@ header, main, footer {
       margin-bottom: 2.5rem; }
     @media only screen and (min-width: 40.063em) {
       .notepad-content .notepad-index-post {
-        padding-top: 4.375rem;
-        padding-bottom: 4.375rem; }
+         padding-top: 2.175rem;
+         padding-bottom: 2.175rem; }
         .notepad-content .notepad-index-post:first-of-type {
           padding-top: 7.5rem; }
         .notepad-content .notepad-index-post .datetime {
@@ -271,7 +271,7 @@ header, main, footer {
     @media only screen and (min-width: 40.063em) {
       .notepad-content .notepad-index-post .notepad-post-header .notepad-post-title {
         text-align: left;
-        font-size: 2.125rem;
+        font-size: 2.05 rem;
         margin-bottom: 0.9375rem; } }
     .notepad-content .notepad-index-post .notepad-post-excerpt {
       color: #000;
@@ -280,7 +280,7 @@ header, main, footer {
       text-align: center; }
       .notepad-content .notepad-index-post .notepad-post-excerpt p {
         margin: 0;
-        font-size: 1.375rem; }
+        font-size: 1.275rem; }
     @media only screen and (min-width: 40.063em) {
       .notepad-content .notepad-index-post .notepad-post-excerpt {
         text-align: left; } }
