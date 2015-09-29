@@ -55,7 +55,7 @@
   top:0;
   left:0;
 }
-.tooltipContainer a { 
+.tooltipContainer a {
   width: 100%;
   background:transparent url(/images/elements/sprites.png) 0px 0px no-repeat;
   padding:0;
@@ -171,8 +171,8 @@
       border-radius: 0.125rem;
       margin-bottom: 0.3125rem; }
       .notepad-content .notepad-index-post .notepad-index-post-tags a:hover {
-        color: #1F85AA;
-        border: 0.0625rem solid #1F85AA; }
+        color: #840000;
+        border: 0.0625rem solid #840000; }
   @media only screen and (min-width: 40.063em) {
     .notepad-content .notepad-index-post .notepad-index-post-tags {
       padding-top: 0.3125rem;
