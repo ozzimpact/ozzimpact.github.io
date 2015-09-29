@@ -1,9 +1,9 @@
 ---
 layout: home
 title: Blog
-description: "ziyasal.com is an online programming blog for professional developers,rebels ;) with a focus on useful techniques, best practices and valuable resources."
-headline: More than just a Developer
-tags: [ziyasal, engineering, blog, programming blog, altdotnet, open source,asp.net mvc,signalr,javascript,nuget,rebel,mvvm,tdd,bdd,best practice,selenium,nodejs, socket.io, ngix, mongodb, redis]
+description: "ozzimpact.github.io is an online programming blog."
+headline:
+tags: [ozzimpact, engineering, blog, programming blog, altdotnet, open source,asp.net mvc,javascript,tdd,best practice,selenium,nodejs, socket.io, mongodb, redis]
 ---
 {% if site.paginate %}
 {% for post in paginator.posts %}
@@ -15,12 +15,6 @@ tags: [ziyasal, engineering, blog, programming blog, altdotnet, open source,asp.
 {% if post.modified %}{% assign modifiedtime = post.modified | date: "%Y%m%d" %}
 {% assign posttime = post.date | date: "%Y%m%d" %}{% endif %}
     <article class="animated-post notepad-index-post post row">
-<div class="small-10 medium-3 large-2 columns datetime">
-    <a class="notepad-blog-logo" href="http://ozzimpact.github.io"><img src="images/elements/logo.png" alt="Blog Logo" class="">
-
-    </a>
-  </div>
-
         <div class="small-12 medium-3 large-2 columns datetime">
             <span class="notepad-post-meta">
                 <time datetime="{{ post.date | date_to_xmlschema }}">
