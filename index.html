@@ -15,14 +15,33 @@ tags: [ziyasal, engineering, blog, programming blog, altdotnet, open source,asp.
 {% if post.modified %}{% assign modifiedtime = post.modified | date: "%Y%m%d" %}
 {% assign posttime = post.date | date: "%Y%m%d" %}{% endif %}
     <article class="animated-post notepad-index-post post row">
-      [‎29.‎9.‎2015 09:42] Ziya Sarikaya:
-No Title
 <div class="small-10 medium-3 large-2 columns datetime">
-  <a class="notepad-blog-logo" href="http://ozzimpact.github.io"><img src="images/elements/logo.png" alt="Blog Logo" class="">
+    <a class="notepad-blog-logo" href="http://ozzimpact.github.io"><img src="images/elements/logo.png" alt="Blog Logo" class="">
 
-  </a>
-</div>
+    </a>
+  </div>
 
+        <div class="small-12 medium-3 large-2 columns datetime">
+            <span class="notepad-post-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">
+                    <span class="day">
+                        {{ post.date | date: "%d" }}
+                    </span>
+                    <span class="month-year">
+                        {{ post.date | date: "%B %Y" }}
+                    </span>
+                    {% if post.modified %}{% if modifiedtime != posttime %}
+                    <span class="month-year">
+                    <br>Updated on
+                    </span>
+                    <time datetime="{{ post.modified | date_to_xmlschema }}">
+                    <span class="month-year">
+                    {{ post.modified | date: "%d %B %Y" }}
+                    </span>
+                    {% endif %}{% endif %}
+                </time>
+            </span>
+        </div>
         <div class="small-12 medium-9 large-10 columns">
             <header class="notepad-post-header">
                 <h3 class="notepad-post-title">
