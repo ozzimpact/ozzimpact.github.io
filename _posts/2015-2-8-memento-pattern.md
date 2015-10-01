@@ -1,13 +1,19 @@
 ---
 layout: post
-title: Memento Pattern in AtScript 
+title: "Memento Pattern in AtScript"
+description: memento, design pattern, AtScript
+headline:
+category: development
+tags: [memento, design pattern, AtScript]
+comments: true
+mathjax:
 ---
 
 
-	
-In this example we will be talking about one of the behavioral pattern which is Memento. The memento pattern provides the ability to capture and externalize an object's internal state for the object is to be restored to this state later without violating encapsulation. There are 3 actors in this pattern which are originator, caretaker and memento. In implementation memento does not have explicit mission. To be more precise, it is the type that two classes can communicate with. Originator is some object that has an internal state. Caretaker handles the storing and restoring processes via memento type. It waits for memento object from originator. Then it does whatever originator wants. Then it returns memento object to the originator. And originator uses it whatever code requires so. 
 
-According to [dofactory](http://www.dofactory.com/net/memento-design-pattern), frequency of use is low for this pattern. 
+In this example we will be talking about one of the behavioral pattern which is Memento. The memento pattern provides the ability to capture and externalize an object's internal state for the object is to be restored to this state later without violating encapsulation. There are 3 actors in this pattern which are originator, caretaker and memento. In implementation memento does not have explicit mission. To be more precise, it is the type that two classes can communicate with. Originator is some object that has an internal state. Caretaker handles the storing and restoring processes via memento type. It waits for memento object from originator. Then it does whatever originator wants. Then it returns memento object to the originator. And originator uses it whatever code requires so.
+
+According to [dofactory](http://www.dofactory.com/net/memento-design-pattern), frequency of use is low for this pattern.
 
 Here is the implementation in [AtScript](https://docs.google.com/document/d/11YUzC-1d0V1-Q3V0fQ7KSit97HnZoKVygDxpWzEYW0U/edit) for this pattern(memento.ats):
 

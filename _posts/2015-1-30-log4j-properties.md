@@ -1,11 +1,17 @@
 ---
 layout: post
-title: Log4j Configuration 
+title: "Log4j Configuration"
+description: Log4j, java, logging, log level
+headline:
+category: development
+tags: [Log4j, java, code, logging, log level]
+comments: true
+mathjax:
 ---
 
 
 
-Here is the example of the most popular log mechanism of Java, Log4j. In this one, I create separate log files for each log level. With this configuration every log file contains only its level information. As an example, info.log shows only info logs not warn or error logs. And also you can choose log severity from the top of the file `log4j.rootlogger=TRACE`. While making this example, I struggled about creating separate files and not showing different level's log in one file. At the end I asked this problem in stackoverflow. Then I found similar problems and their solution. [Here](http://stackoverflow.com/questions/28231893/log4j-how-to-log-by-level-and-the-log-file-should-contains-only-its-levels-log) you can see. 
+Here is the example of the most popular log mechanism of Java, Log4j. In this one, I create separate log files for each log level. With this configuration every log file contains only its level information. As an example, info.log shows only info logs not warn or error logs. And also you can choose log severity from the top of the file `log4j.rootlogger=TRACE`. While making this example, I struggled about creating separate files and not showing different level's log in one file. At the end I asked this problem in stackoverflow. Then I found similar problems and their solution. [Here](http://stackoverflow.com/questions/28231893/log4j-how-to-log-by-level-and-the-log-file-should-contains-only-its-levels-log) you can see.
 
 
 ```
