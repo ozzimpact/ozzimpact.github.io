@@ -214,4 +214,4 @@ Get Sentinel information
 redis-cli -p 26379 info sentinel
 {% endhighlight %}  
 
-_**This is a collaborative post with [Ziya Sarıkaya](http://ziyasal.github.io/development/redis-setup%20and-high-availability/).**_
+_**This is a collaborative post made with [Ziya Sarıkaya](http://ziyasal.github.io/development/redis-setup%20and-high-availability/).**_
