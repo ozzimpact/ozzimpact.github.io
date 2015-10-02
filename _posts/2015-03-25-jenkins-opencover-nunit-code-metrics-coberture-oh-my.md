@@ -151,4 +151,7 @@ Result
 ![Code Coverage - Cobertura]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-25-48.png)  
 
 **Metrics**  
-![Metrics]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-05.png) 
+![Metrics]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-05.png)  
+
+
+_**This is a collaborative post with [Ziya Sarıkaya](http://ziyasal.github.io/development/redis-setup%20and-high-availability/).**_
