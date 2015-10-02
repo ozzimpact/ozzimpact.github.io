@@ -154,4 +154,4 @@ Result
 ![Metrics]({{ site.url }}/images%2Fpost%2F2015-03-20%2F2015-03-26_00-24-05.png)  
 
 
-_**This is a collaborative post with [Ziya Sarıkaya](http://ziyasal.github.io/development/redis-setup%20and-high-availability/).**_
+_**This is a collaborative post made with [Ziya Sarıkaya](http://ziyasal.github.io/development/redis-setup%20and-high-availability/).**_
