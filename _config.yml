@@ -23,7 +23,7 @@ helper:
 
 owner:
   name:           Oguzhan DEMIR
-  avatar:         user-avatar.jpeg
+  avatar:         user-avatar.jpg
   email:          oguzhandemir92@gmail.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:
