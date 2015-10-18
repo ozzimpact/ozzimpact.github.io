@@ -15,6 +15,10 @@ Software Developer, Istanbul/Turkey.
 
 Now working as a Software Developer at [Trendyol.com](http://www.trendyol.com/).
 
+Powered and inspired by [Ziyasal](https://ziyasal.github.io)
+
 ### Contact me
 
 <a href="mailto:{{ site.owner.email }}">{{ site.owner.email }}</a>
+
+
