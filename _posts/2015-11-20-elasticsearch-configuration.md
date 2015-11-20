@@ -102,12 +102,12 @@ Open the _sysctl.conf_;
 nano /etc/sysctl.conf
 ```
 Add these properties
-```
+{% highlight%}
 vm.swappiness=1                          # turn off swapping
 net.core.somaxconn=65535                 # up the number of connections per port
 vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm
 fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html
-```
+{% endhighlight %}
 
 After that, go to the _limits.conf_;
 ```
