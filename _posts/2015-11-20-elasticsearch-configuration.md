@@ -98,38 +98,38 @@ The default installation of Elasticsearch is configured with a 1 GB heap. Accord
 ## Implementation
 
 Open the _sysctl.conf_;
-{% highlight bash %}
+```
 nano /etc/sysctl.conf
-{% endhighlight %}
+```
 Add these properties
-{% highlight bash %}
+```
 vm.swappiness=1                          # turn off swapping
 net.core.somaxconn=65535                 # up the number of connections per port
 vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm
 fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html
-{% endhighlight %}
+```
 
 After that, go to the _limits.conf_;
-{% highlight bash %}
+```
 nano /etc/security/limits.conf
-{% endhighlight %}
+```
 The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES.
-{% highlight bash %}
+```
 elasticsearch    soft    nofile          65535
 elasticsearch    hard    nofile          65535
 elasticsearch    soft    memlock         unlimited
 elasticsearch    hard    memlock         unlimited
 
-{% endhighlight %}
+```
 and to make these properties persistent you have to modify the
-{% highlight bash %}
+```
 nano /etc/pam.d/common-session-noninteractive
 nano /etc/pam.d/common-session
-{% endhighlight %}
+```
 Add this property
-{% endhighlight %}
+```
 session required pam_limits.so
-{% endhighlight %}
+```
 _**You may need to reboot the machine to those changes to be applied.**_  
 
 
@@ -144,7 +144,7 @@ After that execute;
 
 ```sh es.sh```
 
-```bash
+```
 #!/bin/bash
 
 ELASTICSEARCH_VERSION=1.7
@@ -171,14 +171,14 @@ curl http://localhost:9200
 Elasticsearch has newer versions but I go with 1.7. It is up to you. You can choose whichever you want.
 I strongly recommend you to install Elasticsearch this way. If you download the tar.gz and go with that way, you have to create your init scripts and also you have to create Elasticsearch user which is very important to make configuration easier.
 Anyway, I assume you installed it with the script. Now you have elasticsearch.yml and logging.yml files under
-```bash
+```
 cd /etc/elasticsearch
 ```
 In this part, let's open the elasticsearch.yml. I only show you the places that need to be shown. All other settings are default. If you don't believe me [here](https://gist.github.com/ozzimpact/49d750b6cd73eac9acf7) you can check whole file.
-```bash
+```
 nano /etc/elasticsearch/elasticsearch.yml
 ```
-```bash
+```
 bootstrap.mlockall: true
 
 transport.tcp.compress: true
@@ -195,18 +195,18 @@ threadpool:
 ```
 
 After that, let's go to _elasticsearch_ start script.
-```bash
+```
 nano /etc/init.d/elasticsearch
 ```
 One of the most important thing in ES, heap size. As much as I searched, mostly heap size should be half of total ram size and also [should not be more than 30.5GB](https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html).
 
-```bash
+```
 # Heap size defaults to 256m min, 1g max
 # Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
 ES_HEAP_SIZE=4g
 ```
 Finally, you can check the properties for our ES user
-```bash
+```
 su elasticsearch --shell /bin/bash --command "cat /proc/sys/vm/swappiness "
 su elasticsearch --shell /bin/bash --command "cat /proc/sys/net/core/somaxconn"
 su elasticsearch --shell /bin/bash --command "cat /proc/sys/vm/max_map_count "
@@ -218,17 +218,17 @@ su elasticsearch --shell /bin/bash --command "ulimit -Hn"
 ```
 
 You can reboot the machines and check your cluster status from sense
-```bash
+```
 GET /_nodes/process?pretty
 ```
 or check every node from console
-```bash
+```
 curl 'http://localhost:9200/?pretty'
 ```
 
 
 If your nodes don't start on startup, probably your init scripts did not installed properly. Use this command and reboot.
-```bash
+```
 sudo update-rc.d elasticsearch defaults 95 10
 ```
 
