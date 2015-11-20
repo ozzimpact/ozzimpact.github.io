@@ -98,38 +98,38 @@ The default installation of Elasticsearch is configured with a 1 GB heap. Accord
 ## Implementation
 
 Open the _sysctl.conf_;
-```bash
+{% highlight bash %}
 nano /etc/sysctl.conf
-```
+{% endhighlight %}
 Add these properties
-```bash
+{% highlight bash %}
 vm.swappiness=1                          # turn off swapping
 net.core.somaxconn=65535                 # up the number of connections per port
 vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm
 fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html
-```
+{% endhighlight %}
 
 After that, go to the _limits.conf_;
-```bash
+{% highlight bash %}
 nano /etc/security/limits.conf
-```
+{% endhighlight %}
 The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES.
-```bash
+{% highlight bash %}
 elasticsearch    soft    nofile          65535
 elasticsearch    hard    nofile          65535
 elasticsearch    soft    memlock         unlimited
 elasticsearch    hard    memlock         unlimited
 
-```
+{% endhighlight %}
 and to make these properties persistent you have to modify the
-```bash
+{% highlight bash %}
 nano /etc/pam.d/common-session-noninteractive
 nano /etc/pam.d/common-session
-```
+{% endhighlight %}
 Add this property
-```bash
+{% endhighlight %}
 session required pam_limits.so
-```
+{% endhighlight %}
 _**You may need to reboot the machine to those changes to be applied.**_  
 
 
