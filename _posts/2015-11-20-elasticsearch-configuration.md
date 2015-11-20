@@ -9,6 +9,7 @@ comments: true
 mathjax:
 ---
 
+# Elasticsearch Configuration
 _**WARNING: This configuration is not production-ready yet!**_
 
 In this post, we will be talking about how to make Elasticsearch more stable and performant.
@@ -21,7 +22,7 @@ In this post, we will be talking about how to make Elasticsearch more stable and
 # Configuring OS
 
 ### Brief
-First things first, let's get OS ready.
+First things first, let's get OS ready. 
 
 > Virtual memory is typically consumed by processes, file system caches, and the kernel. Virtual memory utilization depends on a number of factors, which can be affected by the following parameters.
 
@@ -51,7 +52,7 @@ Sets the limits of file descriptors for specific user.
 **`elasticsearch    soft     memlock          unlimited`**
 **`elasticsearch    hard     memlock          unlimited`**
 
-I had ``Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).`` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited.
+I had ``Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).`` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
 
 > Just in case, soft limit can be temporarily exceeded by the user,  but the system will not allow a user to exceed hard limit. We just go strict with this so we set both the same value.
 
@@ -102,30 +103,29 @@ Open the _sysctl.conf_;
 nano /etc/sysctl.conf
 ```
 Add these properties
-{% highlight%}
-vm.swappiness=1                          # turn off swapping 
-net.core.somaxconn=65535                 # up the number of connections per port 
-vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm 
-fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html 
-{% endhighlight %}
+```
+vm.swappiness=1                          # turn off swapping
+net.core.somaxconn=65535                 # up the number of connections per port
+vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm
+fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html
+```
 
 After that, go to the _limits.conf_;
 ```
 nano /etc/security/limits.conf
 ```
-The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES. 
+The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES.
+```
+elasticsearch    soft    nofile          65535
+elasticsearch    hard    nofile          65535
+elasticsearch    soft    memlock         unlimited
+elasticsearch    hard    memlock         unlimited
 
 ```
-elasticsearch    soft    nofile          65535 
-elasticsearch    hard    nofile          65535 
-elasticsearch    soft    memlock         unlimited 
-elasticsearch    hard    memlock         unlimited 
-``` 
-
-and to make these properties persistent you have to modify the
+and to make these properties persistent you have to modify the 
 ```
 nano /etc/pam.d/common-session-noninteractive
-nano /etc/pam.d/common-session
+nano /etc/pam.d/common-session 
 ```
 Add this property
 ```
@@ -166,10 +166,10 @@ sudo service elasticsearch start
 sleep 10
 
 ### Make sure service is running
-curl http://localhost:9200
+curl http://localhost:9200 
 ```
-
-Elasticsearch has newer versions but I go with 1.7. It is up to you. You can choose whichever you want.
+ 
+Elasticsearch has newer versions but I go with 1.7. It is up to you. You can choose whichever you want. 
 I strongly recommend you to install Elasticsearch this way. If you download the tar.gz and go with that way, you have to create your init scripts and also you have to create Elasticsearch user which is very important to make configuration easier.
 Anyway, I assume you installed it with the script. Now you have elasticsearch.yml and logging.yml files under
 ```
@@ -228,7 +228,7 @@ curl 'http://localhost:9200/?pretty'
 ```
 
 
-If your nodes don't start on startup, probably your init scripts did not installed properly. Use this command and reboot.
+If your nodes don't start on startup, probably your init scripts did not installed properly. Use this command and reboot. 
 ```
 sudo update-rc.d elasticsearch defaults 95 10
 ```
@@ -240,3 +240,5 @@ If you get this exception ``org.elasticsearch.transport.RemoteTransportException
 
 
 ----------
+
+
