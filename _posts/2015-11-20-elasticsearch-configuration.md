@@ -103,24 +103,25 @@ nano /etc/sysctl.conf
 ```
 Add these properties
 {% highlight%}
-vm.swappiness=1                          # turn off swapping
-net.core.somaxconn=65535                 # up the number of connections per port
-vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm
-fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html
+vm.swappiness=1                          # turn off swapping 
+net.core.somaxconn=65535                 # up the number of connections per port 
+vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm 
+fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html 
 {% endhighlight %}
 
 After that, go to the _limits.conf_;
 ```
 nano /etc/security/limits.conf
 ```
-The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES.
-```
-elasticsearch    soft    nofile          65535
-elasticsearch    hard    nofile          65535
-elasticsearch    soft    memlock         unlimited
-elasticsearch    hard    memlock         unlimited
+The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES. 
 
 ```
+elasticsearch    soft    nofile          65535 
+elasticsearch    hard    nofile          65535 
+elasticsearch    soft    memlock         unlimited 
+elasticsearch    hard    memlock         unlimited 
+``` 
+
 and to make these properties persistent you have to modify the
 ```
 nano /etc/pam.d/common-session-noninteractive
