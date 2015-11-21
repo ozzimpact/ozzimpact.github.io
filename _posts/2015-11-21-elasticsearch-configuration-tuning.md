@@ -29,8 +29,10 @@ First things first, let's get OS ready.
 vm.swappiness
 {% endhighlight %}
 ES recommends to set this value `1`, also according to Red Hat, a low `swappiness` value is recommended for database workloads.  As an example, for Oracle databases, Red Hat recommended  `swappiness` value  is  `10`. For further reading [Tuning Virtual Memory](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-tunables.html). 
-Why do we set this value to 1 instead of 0? 
-Setting swappiness to 0 more aggressively avoids swapping out, which increases the risk of OOM killing under strong memory and I/O pressure.
+
+> Why do we set this value to 1 instead of 0? 
+
+>  Setting swappiness to 0 more aggressively avoids swapping out, which increases the risk of OOM killing under strong memory and I/O pressure.
 {% highlight bash %}
 net.core.somaxconn
 {% endhighlight %}
