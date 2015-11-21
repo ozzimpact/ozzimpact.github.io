@@ -48,7 +48,7 @@ fs.file-max
 Sets the maximum number of file-handles that the Linux kernel will allocate.
 
 {% highlight bash %}
-elasticsearch    soft     nofile             65535 
+elasticsearch    soft     nofile             65535
 elasticsearch    hard     nofile             65535
 {% endhighlight %}
 
@@ -57,7 +57,7 @@ Sets the limits of file descriptors for specific user.
 elasticsearch    soft     memlock          unlimited 
 elasticsearch    hard     memlock          unlimited
 {% endhighlight %}
-I had {% highlight bash %}Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).{% endhighlight %} error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
+I had `Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
 
 > Just in case, soft limit can be temporarily exceeded by the user,  but the system will not allow a user to exceed hard limit. We just go strict with this so we set both the same value.
 {% highlight bash %}
@@ -70,74 +70,87 @@ bootstrap.mlockall: true
 {% endhighlight %}
 
 Tries to lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out. This attribute provides JVM to lock its memory block and protects it from OS to swap this memory block. This is kind of performance optimization.
-
-`indices.fielddata.cache.size: 40%`
-
+{% highlight bash %}
+indices.fielddata.cache.size: 40%
+{% endhighlight %}
 Field data cache is unbounded. This, of course, could make your JVM heap explode.To avoid nasty surprises we limit this with 40%.(affects search performance)
-
-`indices.cache.filter.size: 30%`
+{% highlight bash %}
+indices.cache.filter.size: 30%
+{% endhighlight %}
 
 Even though filters are relatively small, they can take up large portions of the JVM heap if you have a lot of data and numerous different filters. So we limit this with 30%.
 
-`indices.cache.filter.terms.size: 1024mb`
+{% highlight bash %}
+indices.cache.filter.terms.size: 1024mb
+{% endhighlight %}
 
 The size of the lookup cache. Default value is 10mb.
 
-` threadpool.search.type: cached`
+{% highlight bash %}
+threadpool.search.type: cached
+{% endhighlight %}
 
 Thread pool is an unbounded thread pool that will spawn a thread if there are pending requests.
 
-` threadpool.search.size: 100`
+{% highlight bash %}
+threadpool.search.size: 100
+{% endhighlight %}
 
 This parameter controls the number of threads and default value is the number of cores times 5.
 
-` threadpool.search.queue_size: 2000`
+{% highlight bash %}
+threadpool.search.queue_size: 2000
+{% endhighlight %}
 
 Allows to control the size of the queue of pending requests that have no threads to execute them. By default, it is set to -1 which means its unbounded. When a request comes in and the queue is full, it will abort the request. Increasing this too much, causes performance problem.
 
-`transport.tcp.compress`
+{% highlight bash %}
+transport.tcp.compress
+{% endhighlight %}
 
 Set to true to enable compression (LZF) between all nodes. Defaults to false.
 
-`ES_HEAP_SIZE`
+{% highlight bash %}
+ES_HEAP_SIZE
+{% endhighlight %}
 
 The default installation of Elasticsearch is configured with a 1 GB heap. According to our long researches this value should be the half size of total RAM. Should not cross 30.5 GB!
 
 ## Implementation
 
 Open the _sysctl.conf_;
-```bash
+{% highlight bash %}
 nano /etc/sysctl.conf
-```
+{% endhighlight %}
 Add these properties
-```bash
+{% highlight bash %}
 vm.swappiness=1                          # turn off swapping
 net.core.somaxconn=65535                 # up the number of connections per port
 vm.max_map_count=262144                  #(default) http://www.redhat.com/magazine/001nov04/features/vm
 fs.file-max=518144                       # http://www.tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap6sec72.html
-```
+{% endhighlight %}
 
 After that, go to the _limits.conf_;
-```bash
+{% highlight bash %}
 nano /etc/security/limits.conf
-```
+{% endhighlight %}
 The important thing is, which user is defined below. Our ES user should access these informations. It is recommended that using specific user for such big applications.(We did it in Redis too.) This user name is default when you installed the ES.
-```bash
+{% highlight bash %}
 elasticsearch    soft    nofile          65535
 elasticsearch    hard    nofile          65535
 elasticsearch    soft    memlock         unlimited
 elasticsearch    hard    memlock         unlimited
+{% endhighlight %}
 
-```
 and to make these properties persistent you have to modify the 
-```bash
+{% highlight bash %}
 nano /etc/pam.d/common-session-noninteractive
 nano /etc/pam.d/common-session 
-```
+{% endhighlight %}
 Add this property
-```bash
+{% highlight bash %}
 session required pam_limits.so
-```
+
 
 _You may need to reboot the machine to those changes to be applied._  
 
@@ -147,13 +160,15 @@ _You may need to reboot the machine to those changes to be applied._
 
 Now everyting is ready for the Elasticsearch to be installed. You can use this bash script.[Here you can get the gist](https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh).
 
-```wget "https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh" ```
+{% highlight bash %}wget "https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh" {% endhighlight %}
 
 After that execute;
 
-```sh es.sh```
+{% highlight bash %}
+sh es.sh
+{% endhighlight %}
 
-```bash
+{% highlight bash %}
 #!/bin/bash
 
 ELASTICSEARCH_VERSION=1.7
@@ -175,19 +190,19 @@ sleep 10
 
 ### Make sure service is running
 curl http://localhost:9200 
-```
+{% endhighlight %}
  
 Elasticsearch has newer versions but I go with 1.7. It is up to you. You can choose whichever you want. 
 I strongly recommend you to install Elasticsearch this way. If you download the tar.gz and go with that way, you have to create your init scripts and also you have to create Elasticsearch user which is very important to make configuration easier.
 Anyway, I assume you installed it with the script. Now you have elasticsearch.yml and logging.yml files under
-```bash
+{% highlight bash %}
 cd /etc/elasticsearch
-```
+{% endhighlight %}
 In this part, let's open the elasticsearch.yml. I only show you the places that need to be shown. All other settings are default. If you don't believe me [here](https://gist.github.com/ozzimpact/49d750b6cd73eac9acf7) you can check whole file.
-```bash
+{% highlight bash %}
 nano /etc/elasticsearch/elasticsearch.yml
-```
-```bash
+{% endhighlight %}
+{% highlight bash %}
 bootstrap.mlockall: true
 
 transport.tcp.compress: true
@@ -201,21 +216,21 @@ threadpool:
         type: cached
         size: 100
         queue_size: 2000
-```
+{% endhighlight %}
 
 After that, let's go to _elasticsearch_ start script.
-```bash
+{% highlight bash %}
 nano /etc/init.d/elasticsearch
-```
+{% endhighlight %}
 One of the most important thing in ES, heap size. As much as I searched, mostly heap size should be half of total ram size and also [should not be more than 30.5GB](https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html).
 
-```bash
+{% highlight bash %}
 # Heap size defaults to 256m min, 1g max
 # Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
 ES_HEAP_SIZE=4g
-```
+{% endhighlight %}
 Finally, you can check the properties for our ES user
-```bash
+{% highlight bash %}
 su elasticsearch --shell /bin/bash --command "cat /proc/sys/vm/swappiness "
 su elasticsearch --shell /bin/bash --command "cat /proc/sys/net/core/somaxconn"
 su elasticsearch --shell /bin/bash --command "cat /proc/sys/vm/max_map_count "
@@ -224,22 +239,22 @@ su elasticsearch --shell /bin/bash --command "cat /proc/sys/fs/file-max "
 su elasticsearch --shell /bin/bash --command "ulimit -n"
 su elasticsearch --shell /bin/bash --command "ulimit -Sn"
 su elasticsearch --shell /bin/bash --command "ulimit -Hn"
-```
+{% endhighlight %}
 
 You can reboot the machines and check your cluster status from sense
-```bash
+{% highlight bash %}
 GET /_nodes/process?pretty
-```
+{% endhighlight %}
 or check every node from console
-```bash
+{% highlight bash %}
 curl 'http://localhost:9200/?pretty'
-```
+{% endhighlight %}
 
 
 If your nodes don't start on startup, probably your init scripts did not installed properly. Use this command and reboot. 
-```bash
+{% highlight bash %}
 sudo update-rc.d elasticsearch defaults 95 10
-```
+{% endhighlight %}
 
 If you get this exception ``org.elasticsearch.transport.RemoteTransportException`` check your nodes to know which version of java is installed.
 
