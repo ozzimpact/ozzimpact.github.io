@@ -1,3 +1,15 @@
+---
+layout: post
+title: Elasticsearch Configuration and Performance Tuning
+description: elasticsearch, installation, configuration, tuning  
+headline:
+category: development
+tags: [elasticsearch, tuning, ubuntu, full-text, elasticsearch-tuning, elasticsearch configuration, elasticsearch installation]
+comments: true
+mathjax:
+---
+
+
 # Elasticsearch Configuration
 _**WARNING: This configuration is not production-ready yet!**_
 
@@ -88,9 +100,11 @@ The default installation of Elasticsearch is configured with a 1 GB heap. Accord
 ## Implementation
 
 Open the _sysctl.conf_;
-```bash
+
+{% highlight bash %}
 nano /etc/sysctl.conf
-```
+{% highlight bash %}
+
 Add these properties
 ```bash
 vm.swappiness=1                          # turn off swapping
