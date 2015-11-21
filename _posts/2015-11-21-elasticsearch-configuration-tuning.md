@@ -26,73 +26,73 @@ First things first, let's get OS ready.
 
 > Virtual memory is typically consumed by processes, file system caches, and the kernel. Virtual memory utilization depends on a number of factors, which can be affected by the following parameters.
 
-**`vm.swappiness`**
+`vm.swappiness`
 
 ES recommends to set this value `1`, also according to Red Hat, a low `swappiness` value is recommended for database workloads.  As an example, for Oracle databases, Red Hat recommended  `swappiness` value  is  `10`. For further reading [Tuning Virtual Memory](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-tunables.html).
 > Why do we set this value to 1 instead of 0?
 >  Setting swappiness to 0 more aggressively avoids swapping out, which increases the risk of OOM killing under strong memory and I/O pressure.
 
-**`net.core.somaxconn`**
+`net.core.somaxconn`
 
 Maximum number of connection an application can request.
 
-**`vm.max_map_count`**
+`vm.max_map_count`
 
 This property allows for the restriction of the number of VMAs (Virtual Memory Areas) that a particular process can own. When it reaches the limit, out of memory error will be thrown.
 
-**`fs.file-max`**
+`fs.file-max`
 
 Sets the maximum number of file-handles that the Linux kernel will allocate.
 
-**`elasticsearch    soft     nofile             65535`**
-**`elasticsearch    hard     nofile             65535`**
+`elasticsearch    soft     nofile             65535`
+`elasticsearch    hard     nofile             65535`
 
 Sets the limits of file descriptors for specific user.
 
-**`elasticsearch    soft     memlock          unlimited`**
-**`elasticsearch    hard     memlock          unlimited`**
+`elasticsearch    soft     memlock          unlimited`
+`elasticsearch    hard     memlock          unlimited`
 
 I had ``Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).`` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
 
 > Just in case, soft limit can be temporarily exceeded by the user,  but the system will not allow a user to exceed hard limit. We just go strict with this so we set both the same value.
 
-**`session required pam_limits.so`**
+`session required pam_limits.so`
 
 The pam_limits PAM module sets limits on the system resources that can be obtained in a user-session.
 
-**`bootstrap.mlockall: true`**
+`bootstrap.mlockall: true`
 
 Tries to lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out. This attribute provides JVM to lock its memory block and protects it from OS to swap this memory block. This is kind of performance optimization.
 
-**`indices.fielddata.cache.size: 40%`**
+`indices.fielddata.cache.size: 40%`
 
 Field data cache is unbounded. This, of course, could make your JVM heap explode.To avoid nasty surprises we limit this with 40%.(affects search performance)
 
-**`indices.cache.filter.size: 30%`**
+`indices.cache.filter.size: 30%`
 
 Even though filters are relatively small, they can take up large portions of the JVM heap if you have a lot of data and numerous different filters. So we limit this with 30%.
 
-**`indices.cache.filter.terms.size: 1024mb`**
+`indices.cache.filter.terms.size: 1024mb`
 
 The size of the lookup cache. Default value is 10mb.
 
-**` threadpool.search.type: cached`**
+` threadpool.search.type: cached`
 
 Thread pool is an unbounded thread pool that will spawn a thread if there are pending requests.
 
-**` threadpool.search.size: 100`**
+` threadpool.search.size: 100`
 
 This parameter controls the number of threads and default value is the number of cores times 5.
 
-**` threadpool.search.queue_size: 2000`**
+` threadpool.search.queue_size: 2000`
 
 Allows to control the size of the queue of pending requests that have no threads to execute them. By default, it is set to -1 which means its unbounded. When a request comes in and the queue is full, it will abort the request. Increasing this too much, causes performance problem.
 
-**`transport.tcp.compress`**
+`transport.tcp.compress`
 
 Set to true to enable compression (LZF) between all nodes. Defaults to false.
 
-**`ES_HEAP_SIZE`**
+`ES_HEAP_SIZE`
 
 The default installation of Elasticsearch is configured with a 1 GB heap. According to our long researches this value should be the half size of total RAM. Should not cross 30.5 GB!
 
@@ -131,7 +131,8 @@ Add this property
 ```bash
 session required pam_limits.so
 ```
-_**You may need to reboot the machine to those changes to be applied.**_  
+
+_You may need to reboot the machine to those changes to be applied._  
 
 
 
