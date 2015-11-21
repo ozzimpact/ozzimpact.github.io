@@ -45,6 +45,7 @@ This property allows for the restriction of the number of VMAs (Virtual Memory A
 Sets the maximum number of file-handles that the Linux kernel will allocate.
 
 `elasticsearch    soft     nofile             65535`
+
 `elasticsearch    hard     nofile             65535`
 
 Sets the limits of file descriptors for specific user.
