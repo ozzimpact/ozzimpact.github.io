@@ -150,6 +150,7 @@ nano /etc/pam.d/common-session
 Add this property
 {% highlight bash %}
 session required pam_limits.so
+{% endhighlight %}
 
 
 _You may need to reboot the machine to those changes to be applied._  
