@@ -26,41 +26,48 @@ First things first, let's get OS ready.
 
 > Virtual memory is typically consumed by processes, file system caches, and the kernel. Virtual memory utilization depends on a number of factors, which can be affected by the following parameters.
 {% highlight bash %}
-vm.swappiness`
+vm.swappiness
 {% endhighlight %}
 ES recommends to set this value `1`, also according to Red Hat, a low `swappiness` value is recommended for database workloads.  As an example, for Oracle databases, Red Hat recommended  `swappiness` value  is  `10`. For further reading [Tuning Virtual Memory](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-tunables.html).
 > Why do we set this value to 1 instead of 0?
 >  Setting swappiness to 0 more aggressively avoids swapping out, which increases the risk of OOM killing under strong memory and I/O pressure.
-
-`net.core.somaxconn`
-
+{% highlight bash %}
+net.core.somaxconn
+{% endhighlight %}
 Maximum number of connection an application can request.
-
-`vm.max_map_count`
+{% highlight bash %}
+vm.max_map_count
+{% endhighlight %}
 
 This property allows for the restriction of the number of VMAs (Virtual Memory Areas) that a particular process can own. When it reaches the limit, out of memory error will be thrown.
 
-`fs.file-max`
+{% highlight bash %}
+fs.file-max
+{% endhighlight %}
 
 Sets the maximum number of file-handles that the Linux kernel will allocate.
 
-`elasticsearch    soft     nofile             65535`  
-`elasticsearch    hard     nofile             65535`  
+{% highlight bash %}
+elasticsearch    soft     nofile             65535 
+elasticsearch    hard     nofile             65535
+{% endhighlight %}
 
 Sets the limits of file descriptors for specific user.
-
-`elasticsearch    soft     memlock          unlimited`
-`elasticsearch    hard     memlock          unlimited`
-
-I had ``Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).`` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
+{% highlight bash %}
+elasticsearch    soft     memlock          unlimited 
+elasticsearch    hard     memlock          unlimited
+{% endhighlight %}
+I had {% highlight bash %}Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).{% endhighlight %} error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
 
 > Just in case, soft limit can be temporarily exceeded by the user,  but the system will not allow a user to exceed hard limit. We just go strict with this so we set both the same value.
-
-`session required pam_limits.so`
+{% highlight bash %}
+session required pam_limits.so
+{% endhighlight %}
 
 The pam_limits PAM module sets limits on the system resources that can be obtained in a user-session.
-
-`bootstrap.mlockall: true`
+{% highlight bash %}
+bootstrap.mlockall: true
+{% endhighlight %}
 
 Tries to lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out. This attribute provides JVM to lock its memory block and protects it from OS to swap this memory block. This is kind of performance optimization.
 
