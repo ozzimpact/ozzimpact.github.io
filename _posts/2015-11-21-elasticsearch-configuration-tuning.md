@@ -4,7 +4,7 @@ title: Elasticsearch Configuration and Performance Tuning
 description: elasticsearch, installation, configuration, tuning  
 headline:
 category: development
-tags: [elasticsearch, tuning, ubuntu, full-text, elasticsearch-tuning, elasticsearch configuration, elasticsearch installation]
+tags: [elasticsearch, tuning, ubuntu, elasticsearch-tuning, elasticsearch configuration, elasticsearch installation]
 comments: true
 mathjax:
 ---
@@ -22,15 +22,15 @@ In this post, we will be talking about how to make Elasticsearch more stable and
 # Configuring OS
 
 ### Brief
-First things first, let's get OS ready. 
+First things first, let's get OS ready.
 
 > Virtual memory is typically consumed by processes, file system caches, and the kernel. Virtual memory utilization depends on a number of factors, which can be affected by the following parameters.
 {% highlight bash %}
 vm.swappiness
 {% endhighlight %}
-ES recommends to set this value `1`, also according to Red Hat, a low `swappiness` value is recommended for database workloads.  As an example, for Oracle databases, Red Hat recommended  `swappiness` value  is  `10`. For further reading [Tuning Virtual Memory](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-tunables.html). 
+ES recommends to set this value `1`, also according to Red Hat, a low `swappiness` value is recommended for database workloads.  As an example, for Oracle databases, Red Hat recommended  `swappiness` value  is  `10`. For further reading [Tuning Virtual Memory](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/s-memory-tunables.html).
 
-> Why do we set this value to 1 instead of 0? 
+> Why do we set this value to 1 instead of 0?
 
 >  Setting swappiness to 0 more aggressively avoids swapping out, which increases the risk of OOM killing under strong memory and I/O pressure.
 {% highlight bash %}
@@ -56,10 +56,10 @@ elasticsearch    hard     nofile             65535
 
 Sets the limits of file descriptors for specific user.
 {% highlight bash %}
-elasticsearch    soft     memlock          unlimited 
+elasticsearch    soft     memlock          unlimited
 elasticsearch    hard     memlock          unlimited
 {% endhighlight %}
-I had `Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited. 
+I had `Unable to lock JVM memory (ENOMEM). This can result in part of the JVM being swapped out. Increase RLIMIT_MEMLOCK (limit).` error before making this change. But thanks to [mrzard](http://mrzard.github.io/blog/2015/03/25/elasticsearch-enable-mlockall-in-centos-7/) I got rid of this problem by setting this unlimited.
 
 > Just in case, soft limit can be temporarily exceeded by the user,  but the system will not allow a user to exceed hard limit. We just go strict with this so we set both the same value.
 {% highlight bash %}
@@ -144,10 +144,10 @@ elasticsearch    soft    memlock         unlimited
 elasticsearch    hard    memlock         unlimited
 {% endhighlight %}
 
-and to make these properties persistent you have to modify the 
+and to make these properties persistent you have to modify the
 {% highlight bash %}
 nano /etc/pam.d/common-session-noninteractive
-nano /etc/pam.d/common-session 
+nano /etc/pam.d/common-session
 {% endhighlight %}
 Add this property
 {% highlight bash %}
@@ -164,7 +164,7 @@ _You may need to reboot the machine to those changes to be applied._
 Now everyting is ready for the Elasticsearch to be installed. You can use this bash script.[Here you can get the gist](https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh).
 
 {% highlight bash %}
-wget "https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh" 
+wget "https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh"
 {% endhighlight %}
 
 After that execute;
@@ -195,10 +195,10 @@ sudo service elasticsearch start
 sleep 10
 
 ### Make sure service is running
-curl http://localhost:9200 
+curl http://localhost:9200
 {% endhighlight %}
- 
-Elasticsearch has newer versions but I go with 1.7. It is up to you. You can choose whichever you want. 
+
+Elasticsearch has newer versions but I go with 1.7. It is up to you. You can choose whichever you want.
 I strongly recommend you to install Elasticsearch this way. If you download the tar.gz and go with that way, you have to create your init scripts and also you have to create Elasticsearch user which is very important to make configuration easier.
 Anyway, I assume you installed it with the script. Now you have elasticsearch.yml and logging.yml files under
 {% highlight bash %}
@@ -257,7 +257,7 @@ curl 'http://localhost:9200/?pretty'
 {% endhighlight %}
 
 
-If your nodes don't start on startup, probably your init scripts did not installed properly. Use this command and reboot. 
+If your nodes don't start on startup, probably your init scripts did not installed properly. Use this command and reboot.
 {% highlight bash %}
 sudo update-rc.d elasticsearch defaults 95 10
 {% endhighlight %}
@@ -269,5 +269,3 @@ If you get this exception ``org.elasticsearch.transport.RemoteTransportException
 
 
 ----------
-
-
