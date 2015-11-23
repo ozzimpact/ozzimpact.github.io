@@ -16,8 +16,25 @@ In this post, we will be talking about how to make Elasticsearch more stable and
 
 > Elasticsearch is a distributed RESTful search engine built for the cloud. Fore more information please follow [this link](https://www.elastic.co/products/elasticsearch).
 
+Before we start, you can see the difference between test results;
 
-*We can start with tuning OS level settings which mentioned in ES documentations;*
+# Test Results
+
+|                  | Before Tuning | After Tuning |
+|:----------------:|:-------------:|:------------:|
+| Successful calls |      5000     |     5000     |
+|    Total time    |    10.94  s   |    4.73 s    |
+|      Average     |     1.92 s    |    0.76 s    |
+|      Fastest     |     0.17 s    |    0.09 s    |
+|      Slowest     |     4.95 s    |    2.74 s    |
+|        RPS       |    450-500    |   1000-1100  |
+|   Status codes   |               |              |
+|     Code 200     |      4676     |     5000     |
+|     Code 429     |       16      |       0      |
+|     Code 503     |      307      |       0      |
+
+
+*Now we can start with tuning OS level settings which mentioned in ES documentations;*
 
 # Configuring OS
 
