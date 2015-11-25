@@ -738,6 +738,7 @@ blockquote {
     position: relative;
     padding: 1em;
     margin: 0;
+        text-align: left;
 }
 .highlight  { background: #F9F5F9; color: #000000}
 .highlight .hll { background-color: #ffffcc }
