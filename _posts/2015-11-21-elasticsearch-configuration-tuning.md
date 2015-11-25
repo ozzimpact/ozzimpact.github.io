@@ -20,6 +20,8 @@ Before we start, you can see the difference between test results;
 
 # Test Results
 
+Data size: 60-80 Kb
+
 |                  | Before Tuning | After Tuning |
 |:----------------:|:-------------:|:------------:|
 | Successful calls |      5000     |     5000     |
