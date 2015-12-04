@@ -18,6 +18,7 @@ In this post, we will be talking about how to make Elasticsearch more stable and
 
 Before we start, you can see the difference between test results;
 
+----------
 # Test Results
 
 Data size: 60-80 Kb
@@ -37,6 +38,8 @@ Data size: 60-80 Kb
 
 
 *Now we can start with tuning OS level settings which mentioned in ES documentations;*
+
+---------- 
 
 # Configuring OS
 
@@ -137,6 +140,8 @@ ES_HEAP_SIZE
 
 The default installation of Elasticsearch is configured with a 1 GB heap. According to our long researches this value should be the half size of total RAM. Should not cross 30.5 GB!
 
+---------- 
+
 ## Implementation
 
 Open the _sysctl.conf_;
@@ -177,6 +182,7 @@ session required pam_limits.so
 _You may need to reboot the machine to those changes to be applied._  
 
 
+---------- 
 
 ## Configuring Elasticsearch
 
@@ -284,7 +290,7 @@ sudo update-rc.d elasticsearch defaults 95 10
 If you get this exception ``org.elasticsearch.transport.RemoteTransportException`` check your nodes to know which version of java is installed.
 
 
-----------
+
 
 
 ----------
