@@ -9,8 +9,7 @@ comments: true
 mathjax:
 ---
 
-# Elasticsearch Configuration
-_**WARNING: This configuration is not production-ready yet!**_
+# Elasticsearch Configuration 
 
 In this post, we will be talking about how to make Elasticsearch more stable and performant.
 
