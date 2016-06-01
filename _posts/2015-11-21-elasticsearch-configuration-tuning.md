@@ -185,7 +185,7 @@ _You may need to reboot the machine to those changes to be applied._
 
 ## Configuring Elasticsearch
 
-Now everyting is ready for the Elasticsearch to be installed. You can use this bash script.[Here you can get the gist](https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh).
+Now everyting is ready for the Elasticsearch to be installed. You can use this bash script.[Here you can get the gist](https://gist.githubusercontent.com/ozzimpact/9605bbec621891e4bb3d/raw/f111e9da80c4d562f50dfcce1dc5b7ff64a49332/es.sh).
 
 {% highlight bash %}
 wget "https://gist.githubusercontent.com/ziyasal/67b2c68930a168735052/raw/64ff4d6510f91c70416df1ff238f62cda558f6c7/es.sh"
