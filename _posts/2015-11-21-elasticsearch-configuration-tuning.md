@@ -201,22 +201,20 @@ es.sh file
 {% highlight bash %}
 #!/bin/bash
 
-ELASTICSEARCH_VERSION=1.7
+ELASTICSEARCH_VERSION=1.7.3
 
 ### Download and install the Public Signing Key
-wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-
-### Setup Repository
-echo "deb http://packages.elastic.co/elasticsearch/${ELASTICSEARCH_VERSION}/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elk.list
+wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.deb
 
 ### Install Elasticsearch
-sudo apt-get update && sudo apt-get install elasticsearch -y
+sudo dpkg -i elasticsearch-${ELASTICSEARCH_VERSION}.deb
 
-### Start ElasticSearch
+### Use the following commands to ensure, that elasticsearch starts when the system is booted and then start up elasticsearch
+sudo update-rc.d elasticsearch defaults 95 10 
 sudo service elasticsearch start
 
 ### Lets wait a little while ElasticSearch starts
-sleep 10
+sleep 20
 
 ### Make sure service is running
 curl http://localhost:9200
