@@ -43,7 +43,7 @@ Data size: 60-80 Kb
 # Configuring OS
 
 ### Brief
-First things first, let's get OS ready.
+First things first, let's get OS ready. Elasticsearch requires only Java.
 
 > Virtual memory is typically consumed by processes, file system caches, and the kernel. Virtual memory utilization depends on a number of factors, which can be affected by the following parameters.
 {% highlight bash %}
