@@ -239,7 +239,7 @@ Anyway, I assume you installed it with the script. Now you have elasticsearch.ym
 {% highlight bash %}
 cd /etc/elasticsearch
 {% endhighlight %}
-In this part, let's open the elasticsearch.yml. I only show you the places that need to be shown. All other settings are default. If you don't believe me [here](https://gist.github.com/ozzimpact/49d750b6cd73eac9acf7) you can check whole file.
+In this part, let's open the elasticsearch.yml. I only show you the places that need to be shown. All other settings are default. 
 {% highlight bash %}
 nano /etc/elasticsearch/elasticsearch.yml
 {% endhighlight %}
