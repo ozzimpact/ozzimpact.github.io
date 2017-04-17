@@ -7,7 +7,7 @@ share:            true
 readtime:		  true
 wpm:			  200
 dropcap:		  true
-theme:			  blue
+theme: jekyll-theme-cayman
 nprogress:        true
 header_bg:        IMG-20150221-00060.jpg
 author_bg:		  newyork.jpg
