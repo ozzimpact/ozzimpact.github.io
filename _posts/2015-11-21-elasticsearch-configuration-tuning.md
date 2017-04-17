@@ -120,7 +120,7 @@ Very important setting, it prevents clusters from complications. Newer versions 
 discovery.zen.minimum_master_nodes: 2
 {% endhighlight %}
 
-This setting set according to this calculation (number of master-eligible nodes / 2) + 1.
+This setting is set according to this calculation (number of master-eligible nodes / 2) + 1.
 
 {% highlight bash %}
 action.destructive_requires_name:true
@@ -136,14 +136,12 @@ You can prevent the automatic creation of indices by adding this setting to the 
 
 
 {% highlight bash %}
-Zen settings
-{% endhighlight %}
+Discovery Zen settings
 
-{% highlight bash %}
-zen.ping.timeout: 10s
-zen.fd.ping_retries: 3
-zen.fd.ping_interval: 3s
-zen.fd.ping_timeout: 30s
+discovery.zen.ping.timeout: 10s 
+discovery.zen.fd.ping_retries: 3 
+discovery.zen.fd.ping_interval: 3s 
+discovery.zen.fd.ping_timeout: 30s
 {% endhighlight %}
 
 Set these settings to tolerate error rate and prevent undesired connection losses between nodes.
