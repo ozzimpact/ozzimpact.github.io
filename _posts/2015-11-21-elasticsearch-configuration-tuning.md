@@ -43,7 +43,7 @@ Data size: 60-80 Kb
 # Configuring OS
 
 ### Brief
-First things first, let's get OS ready. Elasticsearch requires only Java.
+First things first, let’s get OS(Ubuntu 14.04) ready. Elasticsearch requires only Java(>1.7). Newer ES versions may require higher version of java.
 
 > Virtual memory is typically consumed by processes, file system caches, and the kernel. Virtual memory utilization depends on a number of factors, which can be affected by the following parameters.
 {% highlight bash %}
@@ -94,9 +94,9 @@ bootstrap.mlockall: true
 
 Tries to lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out. This attribute provides JVM to lock its memory block and protects it from OS to swap this memory block. This is kind of performance optimization.
 {% highlight bash %}
-indices.fielddata.cache.size: 40%
+indices.fielddata.cache.size: 30%
 {% endhighlight %}
-Field data cache is unbounded. This, of course, could make your JVM heap explode.To avoid nasty surprises we limit this with 40%.(affects search performance)
+Field data cache is unbounded. This, of course, could make your JVM heap explode.To avoid nasty surprises we limit this with 30%.(affects search performance)
 {% highlight bash %}
 indices.cache.filter.size: 30%
 {% endhighlight %}
@@ -104,34 +104,49 @@ indices.cache.filter.size: 30%
 Even though filters are relatively small, they can take up large portions of the JVM heap if you have a lot of data and numerous different filters. So we limit this with 30%.
 
 {% highlight bash %}
-indices.cache.filter.terms.size: 1024mb
+http.compression: true
 {% endhighlight %}
 
-The size of the lookup cache. Default value is 10mb.
+Support for compression when possible (with Accept-Encoding). Defaults to false. We use it with gzip. Made huge impact on performance.
 
 {% highlight bash %}
-threadpool.search.type: cached
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]
 {% endhighlight %}
 
-Thread pool is an unbounded thread pool that will spawn a thread if there are pending requests.
+Very important setting, it prevents clusters from complications. Newer versions come with default unicast.
 
 {% highlight bash %}
-threadpool.search.size: 100
+discovery.zen.minimum_master_nodes: 2
 {% endhighlight %}
 
-This parameter controls the number of threads and default value is the number of cores times 5.
+This setting set according to this calculation (number of master-eligible nodes / 2) + 1.
 
 {% highlight bash %}
-threadpool.search.queue_size: 2000
+action.destructive_requires_name:true
 {% endhighlight %}
 
-Allows to control the size of the queue of pending requests that have no threads to execute them. By default, it is set to -1 which means its unbounded. When a request comes in and the queue is full, it will abort the request. Increasing this too much, causes performance problem.
+This setting prevents deleting index with wildcards *. Requires full name.
 
 {% highlight bash %}
-transport.tcp.compress
+action.auto_create_index: false
 {% endhighlight %}
 
-Set to true to enable compression (LZF) between all nodes. Defaults to false.
+You can prevent the automatic creation of indices by adding this setting to the config/elasticsearch.yml file on each node.
+
+
+{% highlight bash %}
+Zen settings
+{% endhighlight %}
+
+{% highlight bash %}
+zen.ping.timeout: 10s
+zen.fd.ping_retries: 3
+zen.fd.ping_interval: 3s
+zen.fd.ping_timeout: 30s
+{% endhighlight %}
+
+Set these settings to tolerate error rate and prevent undesired connection losses between nodes.
 
 {% highlight bash %}
 ES_HEAP_SIZE
@@ -233,22 +248,25 @@ nano /etc/elasticsearch/elasticsearch.yml
 {% highlight bash %}
 bootstrap.mlockall: true
 
-transport.tcp.compress: true
-
-indices.fielddata.cache.size: 40%
+action.auto_create_index: false 
+action.destructive_requires_name: true
+indices.fielddata.cache.size: 30%
 indices.cache.filter.size: 30%
-indices.cache.filter.terms.size: 1024mb
 
-threadpool:
-    search:
-        type: cached
-        size: 100
-        queue_size: 2000
+http.compression: true
+
+discovery.zen.minimum_master_nodes: 2
+discovery.zen.ping.multicast.enabled: false 
+discovery.zen.ping.unicast.hosts: ["ip-of-machine-1", "ip-of-machine-2", "ip-of-machine-3"]
+discovery.zen.ping.timeout: 10s 
+discovery.zen.fd.ping_retries: 3 
+discovery.zen.fd.ping_interval: 3s 
+discovery.zen.fd.ping_timeout: 30s
 {% endhighlight %}
 
 After that, let's go to _elasticsearch_ start script.
 {% highlight bash %}
-nano /etc/init.d/elasticsearch
+nano /etc/defaults/elasticsearch
 {% endhighlight %}
 One of the most important thing in ES, heap size. As much as I searched, mostly heap size should be half of total ram size and also [should not be more than 30.5GB](https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html).
 
